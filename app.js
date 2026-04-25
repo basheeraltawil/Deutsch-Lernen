@@ -551,6 +551,15 @@ function getDtzQuizContext(q){
   return q.contextKey ? DTZ_TEXT_BLOCKS[q.contextKey] : '';
 }
 
+function shuffleArray(items){
+  const arr=[...items];
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
 function startDtzInteractiveQuiz(){
   const moduleSel=document.getElementById('dtz-quiz-module-sel');
   const countSel=document.getElementById('dtz-quiz-count-sel');
@@ -559,7 +568,7 @@ function startDtzInteractiveQuiz(){
   const pool=DTZ_INTERACTIVE_QUESTIONS.filter(q=>chosenModule==='all'||q.module===chosenModule);
   if(pool.length===0)return;
 
-  dtzQuizQuestions=[...pool].sort(()=>Math.random()-.5).slice(0,Math.min(requestedCount,pool.length));
+  dtzQuizQuestions=shuffleArray(pool).slice(0,Math.min(requestedCount,pool.length));
   dtzQuizIdx=0;
   dtzQuizCorrect=0;
   dtzQuizAnswered=false;
@@ -603,11 +612,11 @@ function renderDtzInteractiveQuestion(){
     <div class="question-text">${q.prompt}</div>`;
 
   if(q.type==='mc'){
-    html+=`<div class="options">${q.options.map((o,i)=>`<button class="option" onclick="answerDtzMC(${i})">${o}</button>`).join('')}</div>`;
+    html+=`<div class="options">${q.options.map((o,i)=>`<button class="option" aria-label="اختيار ${o}" onclick="answerDtzMC(${i})">${o}</button>`).join('')}</div>`;
   }else{
     html+=`<div class="options">
-      <button class="option" onclick="answerDtzTF(true)">Richtig</button>
-      <button class="option" onclick="answerDtzTF(false)">Falsch</button>
+      <button class="option" aria-label="الإجابة صحيح" onclick="answerDtzTF(true)">Richtig</button>
+      <button class="option" aria-label="الإجابة خطأ" onclick="answerDtzTF(false)">Falsch</button>
     </div>`;
   }
 
@@ -617,7 +626,7 @@ function renderDtzInteractiveQuestion(){
 
 function showDtzQuizFeedback(correct,q){
   const fb=document.getElementById('dtz-quiz-feedback');
-  const expected=q.type==='mc' ? q.options[q.answer] : (q.answer?'Richtig':'Falsch');
+  const expected=q.type==='mc' ? (q.options?.[q.answer]||'Unknown') : (q.answer?'Richtig':'Falsch');
   fb.classList.add('visible',correct?'correct':'wrong');
   fb.innerHTML=correct
     ?`✓ إجابة صحيحة (${expected})`
@@ -629,10 +638,10 @@ function answerDtzMC(idx){
   dtzQuizAnswered=true;
   const q=dtzQuizQuestions[dtzQuizIdx];
   const btns=document.querySelectorAll('#dtz-quiz-content .option');
-  btns.forEach(b=>b.disabled=true);
+  btns.forEach(b=>{b.setAttribute('aria-disabled','true');b.disabled=true;});
   const correct=idx===q.answer;
-  btns[idx].classList.add(correct?'correct':'wrong');
-  if(!correct&&btns[q.answer])btns[q.answer].classList.add('correct');
+  if(btns[idx])btns[idx].classList.add(correct?'correct':'wrong');
+  if(!correct&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<btns.length)btns[q.answer].classList.add('correct');
   showDtzQuizFeedback(correct,q);
   if(correct){dtzQuizCorrect++;addXP(5);}
   document.getElementById('dtz-quiz-next-btn').style.display='inline-flex';
@@ -643,10 +652,12 @@ function answerDtzTF(val){
   dtzQuizAnswered=true;
   const q=dtzQuizQuestions[dtzQuizIdx];
   const btns=document.querySelectorAll('#dtz-quiz-content .option');
-  btns.forEach(b=>b.disabled=true);
+  btns.forEach(b=>{b.setAttribute('aria-disabled','true');b.disabled=true;});
   const correct=val===q.answer;
-  if(btns[val?0:1])btns[val?0:1].classList.add(correct?'correct':'wrong');
-  if(!correct&&btns[q.answer?0:1])btns[q.answer?0:1].classList.add('correct');
+  const selectedIdx=val?0:1;
+  const answerIdx=q.answer?0:1;
+  if(selectedIdx>=0&&selectedIdx<btns.length)btns[selectedIdx].classList.add(correct?'correct':'wrong');
+  if(!correct&&answerIdx>=0&&answerIdx<btns.length)btns[answerIdx].classList.add('correct');
   showDtzQuizFeedback(correct,q);
   if(correct){dtzQuizCorrect++;addXP(5);}
   document.getElementById('dtz-quiz-next-btn').style.display='inline-flex';
