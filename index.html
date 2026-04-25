@@ -40,6 +40,7 @@
     <div class="nav-item" onclick="showSection('sentences')"><span class="icon">💬</span><span>الجمل</span></div>
     <div class="nav-section">التدريب</div>
     <div class="nav-item" onclick="showSection('exercises')"><span class="icon">✏️</span><span>التمارين</span></div>
+    <div class="nav-item" onclick="showSection('dtz')"><span class="icon">🧾</span><span>اختبار DTZ</span></div>
     <div class="nav-item" onclick="showSection('writing')"><span class="icon">📝</span><span>الكتابة</span></div>
     <div class="nav-item" onclick="showSection('reading')"><span class="icon">📄</span><span>القراءة</span></div>
     <div class="nav-item" onclick="showSection('voice')"><span class="icon">🎙️</span><span>النطق</span></div>
@@ -271,6 +272,40 @@
             <button class="btn-secondary" onclick="showExerciseMenu()">قائمة التمارين</button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────── DTZ EXAM PRACTICE ──────────────────── -->
+    <div class="section" id="sec-dtz">
+      <div class="card">
+        <div class="card-title">التحضير الرسمي لاختبار Deutsch-Test für Zuwanderer (A2–B1)</div>
+        <p style="font-size:.92rem;line-height:1.75;color:var(--text)">
+          في هذا القسم يمكنك الوصول الكامل إلى الملفات الرسمية المرفقة، مع تنظيم واضح للمحاور وخطة تدريب عملية تساعدك على الاستعداد للاختبار بشكل احترافي.
+        </p>
+        <div class="dtz-summary-grid" id="dtz-summary-grid"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">مكوّنات الامتحان</div>
+          <div id="dtz-modules-list"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">تسلسل التدريب المقترح</div>
+          <div id="dtz-flow-list"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">ملفات الاختبار الرسمية (كاملة)</div>
+        <div class="dtz-doc-controls">
+          <select class="styled" id="dtz-doc-select" onchange="switchDtzDocument(this.value)"></select>
+          <input class="styled" id="dtz-page-input" type="number" min="1" value="1" style="width:110px">
+          <button class="btn-primary" onclick="goToDtzPage()">اذهب للصفحة</button>
+          <button class="btn-secondary" onclick="openCurrentDtzInNewTab()">فتح في تبويب جديد</button>
+        </div>
+        <div class="dtz-doc-meta" id="dtz-doc-meta"></div>
+        <iframe id="dtz-pdf-frame" class="dtz-pdf-frame" title="DTZ PDF Viewer"></iframe>
       </div>
     </div>
 

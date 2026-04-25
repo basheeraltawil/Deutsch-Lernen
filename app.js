@@ -233,6 +233,35 @@ const ROADMAP_2026 = [
   {key:"2026-12",month:"December 2026",level:"B2",goal:"المراجعة النهائية وإنهاء السنة بخطة استمرارية.",targets:["مراجعة شاملة لأخطاء السنة وتحويلها لقائمة شخصية.","اختبار محاكاة نهائي B2 مع توقيت كامل.","تحسين الطلاقة: 20 دقيقة تحدث يومي بلا توقف.","تحديد خطة Jan 2027 (C1 أو تثبيت B2)."]},
 ];
 
+const DTZ_PDFS = {
+  practice: {
+    label: "Übungssatz 1 (نموذج تدريبي رسمي)",
+    file: "gast_DTZ_UEbungssatz_1.pdf",
+    pages: 56,
+    note: "نموذج امتحان رسمي كامل للتدرب العملي على نمط الأسئلة."
+  },
+  handbook: {
+    label: "DTZ Handbuch (Prüfungsziele/Testbeschreibung)",
+    file: "dtz-handbuch_pdf.pdf",
+    pages: 188,
+    note: "دليل رسمي مفصل لأهداف الامتحان، آلية التقييم، وبناء الاختبار."
+  }
+};
+
+const DTZ_MODULES = [
+  {name:"Hören",focus:"فهم المقاطع الصوتية والإعلانات والمحادثات اليومية."},
+  {name:"Lesen",focus:"فهم النصوص القصيرة والمتوسطة واختيار المعلومات الصحيحة."},
+  {name:"Schreiben",focus:"كتابة رسالة/نص واضح ومنظم وفق المطلوب."},
+  {name:"Sprechen",focus:"التعريف بالنفس، التفاعل، والتحدث المنظم في مواقف عملية."},
+];
+
+const DTZ_PRACTICE_FLOW = [
+  "ابدأ بقراءة نظرة عامة من Handbuch لفهم معايير النجاح.",
+  "حل Übungssatz 1 كاملاً بوقت حقيقي ودون مقاطعة.",
+  "راجع الأخطاء وحدد نمط الضعف (Hören/Lesen/Schreiben/Sprechen).",
+  "أعد المحاولة بعد مراجعة مركزة لتحسين الدقة والثبات."
+];
+
 // ══════════════════════════════════════════════════════════
 //  STORAGE
 // ══════════════════════════════════════════════════════════
@@ -279,7 +308,7 @@ function updateTopbar(){
 // ══════════════════════════════════════════════════════════
 //  NAVIGATION
 // ══════════════════════════════════════════════════════════
-const PAGE_TITLES={dashboard:'لوحة التحكم',vocab:'المفردات',sentences:'الجمل',exercises:'التمارين',writing:'الكتابة',reading:'القراءة',voice:'النطق',chat:'محادثة AI',progress:'الإحصائيات',settings:'الإعدادات'};
+const PAGE_TITLES={dashboard:'لوحة التحكم',vocab:'المفردات',sentences:'الجمل',exercises:'التمارين',dtz:'اختبار DTZ',writing:'الكتابة',reading:'القراءة',voice:'النطق',chat:'محادثة AI',progress:'الإحصائيات',settings:'الإعدادات'};
 function showSection(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -294,6 +323,7 @@ function showSection(id){
   if(id==='progress')renderProgress();
   if(id==='settings')loadSettings();
   if(id==='reading')renderReadings();
+  if(id==='dtz')renderDtzExam();
 }
 function showTab(id){
   document.getElementById('vocab-flashcard').style.display='none';
@@ -412,6 +442,87 @@ function openTask(section,key,xp){
   const done=store.get('dm_daily_done_'+today)||[];
   if(!done.includes(key)){done.push(key);store.set('dm_daily_done_'+today,done);addXP(xp);}
   showSection(section);
+}
+
+// ══════════════════════════════════════════════════════════
+//  DTZ EXAM
+// ══════════════════════════════════════════════════════════
+let currentDtzDocKey='practice';
+
+function getDtzPdfSrc(docKey,page){
+  const doc=DTZ_PDFS[docKey]||DTZ_PDFS.practice;
+  const safePage=Math.max(1,Math.min(parseInt(page)||1,doc.pages));
+  return `${doc.file}#page=${safePage}&view=FitH`;
+}
+
+function switchDtzDocument(docKey){
+  if(!DTZ_PDFS[docKey])return;
+  currentDtzDocKey=docKey;
+  const doc=DTZ_PDFS[docKey];
+  const pageInput=document.getElementById('dtz-page-input');
+  const frame=document.getElementById('dtz-pdf-frame');
+  const meta=document.getElementById('dtz-doc-meta');
+  if(pageInput){
+    pageInput.max=String(doc.pages);
+    pageInput.value='1';
+  }
+  if(frame)frame.src=getDtzPdfSrc(docKey,1);
+  if(meta)meta.textContent=`${doc.label} — ${doc.pages} صفحة — ${doc.note}`;
+}
+
+function goToDtzPage(){
+  const pageInput=document.getElementById('dtz-page-input');
+  if(!pageInput)return;
+  const doc=DTZ_PDFS[currentDtzDocKey];
+  if(!doc)return;
+  const safePage=Math.max(1,Math.min(parseInt(pageInput.value)||1,doc.pages));
+  pageInput.value=String(safePage);
+  const frame=document.getElementById('dtz-pdf-frame');
+  if(frame)frame.src=getDtzPdfSrc(currentDtzDocKey,safePage);
+}
+
+function openCurrentDtzInNewTab(){
+  const page=parseInt(document.getElementById('dtz-page-input')?.value)||1;
+  window.open(getDtzPdfSrc(currentDtzDocKey,page),'_blank','noopener,noreferrer');
+}
+
+function renderDtzExam(){
+  const summary=document.getElementById('dtz-summary-grid');
+  if(summary){
+    summary.innerHTML=`
+      <div class="dtz-stat"><div class="num">2</div><div class="lbl">ملفات رسمية مدمجة</div></div>
+      <div class="dtz-stat"><div class="num">${DTZ_PDFS.practice.pages}</div><div class="lbl">صفحات نموذج التدريب</div></div>
+      <div class="dtz-stat"><div class="num">${DTZ_PDFS.handbook.pages}</div><div class="lbl">صفحات الدليل الرسمي</div></div>
+    `;
+  }
+
+  const modules=document.getElementById('dtz-modules-list');
+  if(modules){
+    modules.innerHTML=DTZ_MODULES.map(m=>`
+      <div class="dtz-item">
+        <h4>${m.name}</h4>
+        <p>${m.focus}</p>
+      </div>
+    `).join('');
+  }
+
+  const flow=document.getElementById('dtz-flow-list');
+  if(flow){
+    flow.innerHTML=DTZ_PRACTICE_FLOW.map((step,idx)=>`
+      <div class="dtz-item">
+        <h4>الخطوة ${idx+1}</h4>
+        <p>${step}</p>
+      </div>
+    `).join('');
+  }
+
+  const select=document.getElementById('dtz-doc-select');
+  if(select && !select.options.length){
+    select.innerHTML=Object.entries(DTZ_PDFS).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('');
+  }
+
+  if(select)select.value=currentDtzDocKey;
+  switchDtzDocument(currentDtzDocKey);
 }
 
 // ══════════════════════════════════════════════════════════
@@ -1064,6 +1175,7 @@ function init(){
   renderVocab();
   renderSentences();
   renderReadings();
+  renderDtzExam();
 
   const savedLevel=store.get('dm_level',DEFAULT_LEVEL);
   document.getElementById('level-select').value=savedLevel;
