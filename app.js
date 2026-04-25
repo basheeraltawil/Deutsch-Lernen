@@ -551,6 +551,15 @@ function getDtzQuizContext(q){
   return q.contextKey ? DTZ_TEXT_BLOCKS[q.contextKey] : '';
 }
 
+function escapeHtml(value){
+  return String(value??'')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
 function shuffleArray(items){
   const arr=[...items];
   for(let i=arr.length-1;i>0;i--){
@@ -605,14 +614,22 @@ function renderDtzInteractiveQuestion(){
   document.getElementById('dtz-quiz-feedback').classList.remove('visible','correct','wrong');
 
   const context=getDtzQuizContext(q);
+  const safeModule=escapeHtml(q.module);
+  const safeId=escapeHtml(q.id);
+  const safeSource=escapeHtml(q.source);
+  const safePrompt=escapeHtml(q.prompt);
+  const safeContext=escapeHtml(context);
   let html=`<div class="question-card">
-    <div class="question-type">${q.module} • سؤال ${q.id}</div>
-    <div class="dtz-source">${q.source}</div>
-    ${context?`<div class="dtz-context">${context}</div>`:''}
-    <div class="question-text">${q.prompt}</div>`;
+    <div class="question-type">${safeModule} • سؤال ${safeId}</div>
+    <div class="dtz-source">${safeSource}</div>
+    ${context?`<div class="dtz-context">${safeContext}</div>`:''}
+    <div class="question-text">${safePrompt}</div>`;
 
   if(q.type==='mc'){
-    html+=`<div class="options">${q.options.map((o,i)=>`<button class="option" aria-label="اختيار ${o}" onclick="answerDtzMC(${i})">${o}</button>`).join('')}</div>`;
+    html+=`<div class="options">${q.options.map((o,i)=>{
+      const safeOption=escapeHtml(o);
+      return `<button class="option" aria-label="اختيار ${safeOption}" onclick="answerDtzMC(${i})">${safeOption}</button>`;
+    }).join('')}</div>`;
   }else{
     html+=`<div class="options">
       <button class="option" aria-label="الإجابة صحيح" onclick="answerDtzTF(true)">Richtig</button>
@@ -626,11 +643,13 @@ function renderDtzInteractiveQuestion(){
 
 function showDtzQuizFeedback(correct,q){
   const fb=document.getElementById('dtz-quiz-feedback');
-  const expected=q.type==='mc' ? (q.options?.[q.answer]||'غير معروف') : (q.answer?'Richtig':'Falsch');
+  const expectedRaw=q.type==='mc' ? (q.options?.[q.answer]||'غير معروف') : (q.answer?'Richtig':'Falsch');
+  const expected=escapeHtml(expectedRaw);
+  const explain=escapeHtml(q.explain||'');
   fb.classList.add('visible',correct?'correct':'wrong');
   fb.innerHTML=correct
     ?`✓ إجابة صحيحة (${expected})`
-    :`✗ إجابة خاطئة. الصواب: <strong>${expected}</strong>${q.explain?`<br><small>${q.explain}</small>`:''}`;
+    :`✗ إجابة خاطئة. الصواب: <strong>${expected}</strong>${q.explain?`<br><small>${explain}</small>`:''}`;
 }
 
 function answerDtzMC(idx){
@@ -641,8 +660,8 @@ function answerDtzMC(idx){
   btns.forEach(b=>{b.setAttribute('aria-disabled','true');b.disabled=true;});
   const correct=idx===q.answer;
   if(btns[idx])btns[idx].classList.add(correct?'correct':'wrong');
-  const shouldHighlightCorrect=!correct&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<btns.length;
-  if(shouldHighlightCorrect)btns[q.answer].classList.add('correct');
+  const shouldHighlightCorrectAnswer=!correct&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<btns.length;
+  if(shouldHighlightCorrectAnswer)btns[q.answer].classList.add('correct');
   showDtzQuizFeedback(correct,q);
   if(correct){dtzQuizCorrect++;addXP(5);}
   document.getElementById('dtz-quiz-next-btn').style.display='inline-flex';
@@ -658,8 +677,8 @@ function answerDtzTF(val){
   const selectedIdx=val?0:1;
   const answerIdx=q.answer?0:1;
   if(selectedIdx>=0&&selectedIdx<btns.length)btns[selectedIdx].classList.add(correct?'correct':'wrong');
-  const shouldHighlightCorrect=!correct&&answerIdx>=0&&answerIdx<btns.length;
-  if(shouldHighlightCorrect)btns[answerIdx].classList.add('correct');
+  const shouldHighlightCorrectAnswer=!correct&&answerIdx>=0&&answerIdx<btns.length;
+  if(shouldHighlightCorrectAnswer)btns[answerIdx].classList.add('correct');
   showDtzQuizFeedback(correct,q);
   if(correct){dtzQuizCorrect++;addXP(5);}
   document.getElementById('dtz-quiz-next-btn').style.display='inline-flex';
