@@ -238,7 +238,7 @@ const DTZ_PDFS = {
     label: "Übungssatz 1 (نموذج تدريبي رسمي)",
     file: "gast_DTZ_UEbungssatz_1.pdf",
     pages: 56,
-    note: "نموذج امتحان رسمي كامل للتدرب العملي على نمط الأسئلة."
+    note: "نموذج امتحان رسمي كامل للتدريب العملي على نمط الأسئلة."
   },
   handbook: {
     label: "DTZ Handbuch (Prüfungsziele/Testbeschreibung)",
@@ -449,9 +449,13 @@ function openTask(section,key,xp){
 // ══════════════════════════════════════════════════════════
 let currentDtzDocKey='practice';
 
+function normalizeDtzPage(page,maxPages){
+  return Math.max(1,Math.min(parseInt(page)||1,maxPages));
+}
+
 function getDtzPdfSrc(docKey,page){
   const doc=DTZ_PDFS[docKey]||DTZ_PDFS.practice;
-  const safePage=Math.max(1,Math.min(parseInt(page)||1,doc.pages));
+  const safePage=normalizeDtzPage(page,doc.pages);
   return `${doc.file}#page=${safePage}&view=FitH`;
 }
 
@@ -475,7 +479,7 @@ function goToDtzPage(){
   if(!pageInput)return;
   const doc=DTZ_PDFS[currentDtzDocKey];
   if(!doc)return;
-  const safePage=Math.max(1,Math.min(parseInt(pageInput.value)||1,doc.pages));
+  const safePage=normalizeDtzPage(pageInput.value,doc.pages);
   pageInput.value=String(safePage);
   const frame=document.getElementById('dtz-pdf-frame');
   if(frame)frame.src=getDtzPdfSrc(currentDtzDocKey,safePage);
@@ -518,7 +522,7 @@ function renderDtzExam(){
   }
 
   const select=document.getElementById('dtz-doc-select');
-  if(select && !select.options.length){
+  if(select){
     select.innerHTML=Object.entries(DTZ_PDFS).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('');
   }
 
