@@ -1,6 +1,8 @@
 // ══════════════════════════════════════════════════════════
 //  DATA
 // ══════════════════════════════════════════════════════════
+const DEFAULT_LEVEL = 'A2';
+
 const VOCAB = [
   // GREETINGS A1
   {de:"Hallo",en:"مرحباً",type:"int.",cat:"greetings",level:"A1",example:"Hallo, wie geht es dir?"},
@@ -220,15 +222,15 @@ const STUDY_RESOURCES = [
 ];
 
 const ROADMAP_2026 = [
-  {month:"April 2026",level:"A2+",goal:"تثبيت أساس A2 وإغلاق الفجوات القديمة.",targets:["إنهاء مراجعة A2 الأساسية (الزمن الماضي Perfekt/Präteritum الشائع).","حفظ 180-220 كلمة عالية التكرار.","3 مواضيع كتابة قصيرة (رسالة/موعد/وصف يوم).","2 محادثة أسبوعية قصيرة (5-10 دقائق)."]},
-  {month:"May 2026",level:"A2+",goal:"الانتقال السلس نحو B1.",targets:["الروابط الأساسية weil, dass, wenn, obwohl.","فهم 70% من مقاطع Easy German القصيرة مع الترجمة.","حل نموذجين TELC A2 كاملين.","كتابة 8 نصوص يومية مصححة."]},
-  {month:"June 2026",level:"B1-",goal:"بداية B1 بشكل عملي.",targets:["قراءة نصوص B1 القصيرة يومياً (150-220 كلمة).","توسيع المفردات المهنية واليومية (200 كلمة).","تدريب نطق Shadowing لـ 12 مقطع صوتي.","امتحان قياس ذاتي بنهاية الشهر."]},
-  {month:"July 2026",level:"B1",goal:"تقوية الاستماع والتحدث لمستوى B1.",targets:["محادثة 3 مرات أسبوعياً (15 دقيقة).","تلخيص فيديو/بودكاست يومياً بجمل بسيطة.","حل وحدات قواعد B1 الأكثر تكراراً.","كتابة رسائل رسمية وغير رسمية وفق نمط الامتحان."]},
-  {month:"August 2026",level:"B1",goal:"ترسيخ B1 وتحسين الدقة.",targets:["3 نماذج TELC B1 (قراءة + استماع + كتابة).","تقليل أخطاء الحالات والإعراب عبر مراجعة مركزة.","بناء بنك جمل جاهزة للامتحان الشفهي.","رفع مدة القراءة اليومية إلى 30 دقيقة."]},
-  {month:"September 2026",level:"B1+",goal:"التحضير للانتقال إلى B2.",targets:["تعلم تراكيب B2 الأساسية (Nominalisierung/Passiv/Konjunktiv II).","تعرض يومي لمحتوى أبطأ بدون ترجمة أول 10 دقائق.","كتابة مقالات رأي قصيرة (120-160 كلمة).","نموذج B1 نهائي + تحليل نقاط الضعف."]},
-  {month:"October 2026",level:"B2-",goal:"بدء B2 بالتركيز على الفهم الأكاديمي.",targets:["قراءة مقالات B2 مبسطة 4 مرات أسبوعياً.","مفردات موضوعية: Arbeit, Gesellschaft, Umwelt, Bildung.","نقاشات شفوية منظمة مع أسباب وأمثلة.","حل أجزاء من نماذج TELC/Goethe B2 تدريجياً."]},
-  {month:"November 2026",level:"B2",goal:"تثبيت إنتاج اللغة (كتابة + تحدث).",targets:["كتابة 2 نص حِجاجي أسبوعياً مع مراجعة الأخطاء المتكررة.","تمارين Hörverstehen B2 شبه يومية.","تدريب على تقديم رأي كامل خلال 2-3 دقائق.","نموذجان امتحان B2 كاملان."]},
-  {month:"December 2026",level:"B2",goal:"المراجعة النهائية وإنهاء السنة بخطة استمرارية.",targets:["مراجعة شاملة لأخطاء السنة وتحويلها لقائمة شخصية.","اختبار محاكاة نهائي B2 مع توقيت كامل.","تحسين الطلاقة: 20 دقيقة تحدث يومي بلا توقف.","تحديد خطة Jan 2027 (C1 أو تثبيت B2)."]},
+  {key:"2026-04",month:"April 2026",level:"A2+",goal:"تثبيت أساس A2 وإغلاق الفجوات القديمة.",targets:["إنهاء مراجعة A2 الأساسية (الزمن الماضي Perfekt/Präteritum الشائع).","حفظ 180-220 كلمة عالية التكرار.","3 مواضيع كتابة قصيرة (رسالة/موعد/وصف يوم).","2 محادثة أسبوعية قصيرة (5-10 دقائق)."]},
+  {key:"2026-05",month:"May 2026",level:"A2+",goal:"الانتقال السلس نحو B1.",targets:["الروابط الأساسية weil, dass, wenn, obwohl.","فهم 70% من مقاطع Easy German القصيرة مع الترجمة.","حل نموذجين TELC A2 كاملين.","كتابة 8 نصوص يومية مصححة."]},
+  {key:"2026-06",month:"June 2026",level:"B1-",goal:"بداية B1 بشكل عملي.",targets:["قراءة نصوص B1 القصيرة يومياً (150-220 كلمة).","توسيع المفردات المهنية واليومية (200 كلمة).","تدريب نطق Shadowing لـ 12 مقطع صوتي.","امتحان قياس ذاتي بنهاية الشهر."]},
+  {key:"2026-07",month:"July 2026",level:"B1",goal:"تقوية الاستماع والتحدث لمستوى B1.",targets:["محادثة 3 مرات أسبوعياً (15 دقيقة).","تلخيص فيديو/بودكاست يومياً بجمل بسيطة.","حل وحدات قواعد B1 الأكثر تكراراً.","كتابة رسائل رسمية وغير رسمية وفق نمط الامتحان."]},
+  {key:"2026-08",month:"August 2026",level:"B1",goal:"ترسيخ B1 وتحسين الدقة.",targets:["3 نماذج TELC B1 (قراءة + استماع + كتابة).","تقليل أخطاء الحالات والإعراب عبر مراجعة مركزة.","بناء بنك جمل جاهزة للامتحان الشفهي.","رفع مدة القراءة اليومية إلى 30 دقيقة."]},
+  {key:"2026-09",month:"September 2026",level:"B1+",goal:"التحضير للانتقال إلى B2.",targets:["تعلم تراكيب B2 الأساسية (Nominalisierung/Passiv/Konjunktiv II).","تعرض يومي لمحتوى أبطأ بدون ترجمة أول 10 دقائق.","كتابة مقالات رأي قصيرة (120-160 كلمة).","نموذج B1 نهائي + تحليل نقاط الضعف."]},
+  {key:"2026-10",month:"October 2026",level:"B2-",goal:"بدء B2 بالتركيز على الفهم الأكاديمي.",targets:["قراءة مقالات B2 مبسطة 4 مرات أسبوعياً.","مفردات موضوعية: Arbeit, Gesellschaft, Umwelt, Bildung.","نقاشات شفوية منظمة مع أسباب وأمثلة.","حل أجزاء من نماذج TELC/Goethe B2 تدريجياً."]},
+  {key:"2026-11",month:"November 2026",level:"B2",goal:"تثبيت إنتاج اللغة (كتابة + تحدث).",targets:["كتابة 2 نص حِجاجي أسبوعياً مع مراجعة الأخطاء المتكررة.","تمارين Hörverstehen B2 شبه يومية.","تدريب على تقديم رأي كامل خلال 2-3 دقائق.","نموذجان امتحان B2 كاملان."]},
+  {key:"2026-12",month:"December 2026",level:"B2",goal:"المراجعة النهائية وإنهاء السنة بخطة استمرارية.",targets:["مراجعة شاملة لأخطاء السنة وتحويلها لقائمة شخصية.","اختبار محاكاة نهائي B2 مع توقيت كامل.","تحسين الطلاقة: 20 دقيقة تحدث يومي بلا توقف.","تحديد خطة Jan 2027 (C1 أو تثبيت B2)."]},
 ];
 
 // ══════════════════════════════════════════════════════════
@@ -333,12 +335,13 @@ function renderLearningProgram(){
   `).join('');
 
   const now=new Date();
-  const currentMonthName=`${now.toLocaleString('en-US',{month:'long'})} ${now.getFullYear()}`;
-  const currentPlan=ROADMAP_2026.find(m=>m.month===currentMonthName)||ROADMAP_2026[ROADMAP_2026.length-1];
-  const monthsLeft=ROADMAP_2026.filter(m=>{
-    const d=new Date(`${m.month} 01`);
-    return d>=new Date(now.getFullYear(),now.getMonth(),1);
-  }).length;
+  const currentKey=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  const firstPlan=ROADMAP_2026[0];
+  const lastPlan=ROADMAP_2026[ROADMAP_2026.length-1];
+  const currentPlan=
+    ROADMAP_2026.find(m=>m.key===currentKey)||
+    (currentKey<firstPlan.key?firstPlan:lastPlan);
+  const monthsLeft=currentKey>lastPlan.key?0:ROADMAP_2026.filter(m=>m.key>=currentKey).length;
 
   document.getElementById('roadmap-summary').textContent=
     `أنت تبدأ من A2 (وليس من الصفر). الشهر الحالي: ${currentPlan.month} — الهدف: ${currentPlan.goal}. متبقي ${monthsLeft} شهر حتى نهاية 2026.`;
@@ -1001,7 +1004,7 @@ function renderProgress(){
 function loadSettings(){
   const key=store.get('dm_api_key','');
   if(key)document.getElementById('api-key-input').value=key;
-  const lvl=store.get('dm_level','A2');
+  const lvl=store.get('dm_level',DEFAULT_LEVEL);
   document.getElementById('settings-level-sel').value=lvl;
   const goal=store.get('dm_daily_goal',20);
   document.getElementById('settings-daily-goal').value=goal;
@@ -1062,7 +1065,7 @@ function init(){
   renderSentences();
   renderReadings();
 
-  const savedLevel=store.get('dm_level','A2');
+  const savedLevel=store.get('dm_level',DEFAULT_LEVEL);
   document.getElementById('level-select').value=savedLevel;
 }
 
