@@ -476,7 +476,7 @@ function switchDtzDocument(docKey){
     pageInput.value='1';
   }
   if(frame)frame.src=getDtzPdfSrc(docKey,1);
-  if(meta)meta.textContent=`${doc.label} — ${doc.pages} صفحة — ${doc.note}`;
+  if(meta)meta.textContent=`${doc.label} — ${doc.pages} صفحة — ${doc.note} (ملاحظة: قد يختلف دعم فتح الصفحة مباشرة حسب متصفحك).`;
 }
 
 function goToDtzPage(){

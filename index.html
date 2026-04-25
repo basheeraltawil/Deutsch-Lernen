@@ -299,7 +299,9 @@
       <div class="card">
         <div class="card-title">ملفات الاختبار الرسمية (كاملة)</div>
         <div class="dtz-doc-controls">
-          <select class="styled" id="dtz-doc-select" aria-label="اختيار ملف اختبار DTZ" onchange="switchDtzDocument(this.value)"></select>
+          <select class="styled" id="dtz-doc-select" aria-label="اختيار ملف اختبار DTZ" onchange="switchDtzDocument(this.value)">
+            <option value="">جاري تحميل الملفات...</option>
+          </select>
           <input class="styled" id="dtz-page-input" aria-label="رقم صفحة ملف DTZ" type="number" min="1" value="1" style="width:110px">
           <button class="btn-primary" onclick="goToDtzPage()">اذهب للصفحة</button>
           <button class="btn-secondary" onclick="openCurrentDtzInNewTab()">فتح في تبويب جديد</button>
