@@ -338,5 +338,6 @@ select.styled:focus,input.styled:focus{border-color:var(--gold)}
 .dtz-context{padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);font-size:.84rem;line-height:1.65;color:var(--text);margin-bottom:10px}
 
 @media(max-width:900px){
+  .dtz-summary-grid{grid-template-columns:1fr}
   .dtz-pdf-frame{height:65vh}
 }

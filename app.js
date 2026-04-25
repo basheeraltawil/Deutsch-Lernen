@@ -662,6 +662,10 @@ function nextDtzInteractiveQuestion(){
 }
 
 function endDtzInteractiveQuiz(){
+  if(!dtzQuizQuestions.length){
+    resetDtzInteractiveQuiz();
+    return;
+  }
   const acc=Math.round((dtzQuizCorrect/dtzQuizQuestions.length)*100);
   const s=getStats();
   s.dtzHistory=s.dtzHistory||[];
