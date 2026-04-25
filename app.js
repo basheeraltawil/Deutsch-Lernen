@@ -482,6 +482,7 @@ function goToDtzPage(){
 }
 
 function openCurrentDtzInNewTab(){
+  if(!DTZ_PDFS[currentDtzDocKey])return;
   const page=parseInt(document.getElementById('dtz-page-input')?.value)||1;
   window.open(getDtzPdfSrc(currentDtzDocKey,page),'_blank','noopener,noreferrer');
 }
