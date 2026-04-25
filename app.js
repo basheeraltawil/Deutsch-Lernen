@@ -626,7 +626,7 @@ function renderDtzInteractiveQuestion(){
 
 function showDtzQuizFeedback(correct,q){
   const fb=document.getElementById('dtz-quiz-feedback');
-  const expected=q.type==='mc' ? (q.options?.[q.answer]||'Unknown') : (q.answer?'Richtig':'Falsch');
+  const expected=q.type==='mc' ? (q.options?.[q.answer]||'غير معروف') : (q.answer?'Richtig':'Falsch');
   fb.classList.add('visible',correct?'correct':'wrong');
   fb.innerHTML=correct
     ?`✓ إجابة صحيحة (${expected})`
@@ -641,7 +641,8 @@ function answerDtzMC(idx){
   btns.forEach(b=>{b.setAttribute('aria-disabled','true');b.disabled=true;});
   const correct=idx===q.answer;
   if(btns[idx])btns[idx].classList.add(correct?'correct':'wrong');
-  if(!correct&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<btns.length)btns[q.answer].classList.add('correct');
+  const shouldHighlightCorrect=!correct&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<btns.length;
+  if(shouldHighlightCorrect)btns[q.answer].classList.add('correct');
   showDtzQuizFeedback(correct,q);
   if(correct){dtzQuizCorrect++;addXP(5);}
   document.getElementById('dtz-quiz-next-btn').style.display='inline-flex';
@@ -657,7 +658,8 @@ function answerDtzTF(val){
   const selectedIdx=val?0:1;
   const answerIdx=q.answer?0:1;
   if(selectedIdx>=0&&selectedIdx<btns.length)btns[selectedIdx].classList.add(correct?'correct':'wrong');
-  if(!correct&&answerIdx>=0&&answerIdx<btns.length)btns[answerIdx].classList.add('correct');
+  const shouldHighlightCorrect=!correct&&answerIdx>=0&&answerIdx<btns.length;
+  if(shouldHighlightCorrect)btns[answerIdx].classList.add('correct');
   showDtzQuizFeedback(correct,q);
   if(correct){dtzQuizCorrect++;addXP(5);}
   document.getElementById('dtz-quiz-next-btn').style.display='inline-flex';
