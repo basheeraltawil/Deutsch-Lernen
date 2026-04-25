@@ -453,6 +453,11 @@ function normalizeDtzPage(page,maxPages){
   return Math.max(1,Math.min(parseInt(page)||1,maxPages));
 }
 
+function getDtzPageInputValue(){
+  const pageInput=document.getElementById('dtz-page-input');
+  return pageInput ? parseInt(pageInput.value)||1 : 1;
+}
+
 function getDtzPdfSrc(docKey,page){
   const doc=DTZ_PDFS[docKey]||DTZ_PDFS.practice;
   const safePage=normalizeDtzPage(page,doc.pages);
@@ -479,7 +484,7 @@ function goToDtzPage(){
   if(!pageInput)return;
   const doc=DTZ_PDFS[currentDtzDocKey];
   if(!doc)return;
-  const safePage=normalizeDtzPage(pageInput.value,doc.pages);
+  const safePage=normalizeDtzPage(getDtzPageInputValue(),doc.pages);
   pageInput.value=String(safePage);
   const frame=document.getElementById('dtz-pdf-frame');
   if(frame)frame.src=getDtzPdfSrc(currentDtzDocKey,safePage);
@@ -487,7 +492,7 @@ function goToDtzPage(){
 
 function openCurrentDtzInNewTab(){
   if(!DTZ_PDFS[currentDtzDocKey])return;
-  const page=parseInt(document.getElementById('dtz-page-input')?.value)||1;
+  const page=getDtzPageInputValue();
   window.open(getDtzPdfSrc(currentDtzDocKey,page),'_blank','noopener,noreferrer');
 }
 
@@ -524,10 +529,9 @@ function renderDtzExam(){
   const select=document.getElementById('dtz-doc-select');
   if(select){
     select.innerHTML=Object.entries(DTZ_PDFS).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('');
+    select.value=currentDtzDocKey;
+    switchDtzDocument(select.value||currentDtzDocKey);
   }
-
-  if(select)select.value=currentDtzDocKey;
-  switchDtzDocument(currentDtzDocKey);
 }
 
 // ══════════════════════════════════════════════════════════
