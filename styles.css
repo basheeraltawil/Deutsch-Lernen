@@ -322,7 +322,7 @@ select.styled:focus,input.styled:focus{border-color:var(--gold)}
 .roadmap-month li{font-size:.86rem;color:var(--text);line-height:1.6;margin-bottom:4px}
 
 /* ─── DTZ EXAM ─── */
-.dtz-summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.dtz-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:14px}
 .dtz-stat{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
 .dtz-stat .num{font-family:'Oswald',sans-serif;font-size:1.8rem;color:var(--gold);line-height:1}
 .dtz-stat .lbl{font-size:.72rem;color:var(--muted);margin-top:5px;letter-spacing:.08em;text-transform:uppercase;font-family:'Oswald',sans-serif}
@@ -333,8 +333,10 @@ select.styled:focus,input.styled:focus{border-color:var(--gold)}
 .dtz-doc-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
 .dtz-doc-meta{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:12px}
 .dtz-pdf-frame{width:100%;height:78vh;border:1px solid var(--border);border-radius:var(--radius);background:#111}
+.dtz-quiz-empty{padding:14px;border:1px dashed var(--border);border-radius:var(--radius);font-size:.86rem;color:var(--muted);background:var(--surface2);margin-bottom:10px}
+.dtz-source{font-size:.72rem;font-family:'Oswald',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:6px 0 10px}
+.dtz-context{padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);font-size:.84rem;line-height:1.65;color:var(--text);margin-bottom:10px}
 
 @media(max-width:900px){
-  .dtz-summary-grid{grid-template-columns:1fr}
   .dtz-pdf-frame{height:65vh}
 }

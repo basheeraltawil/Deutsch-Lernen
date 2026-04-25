@@ -262,6 +262,56 @@ const DTZ_PRACTICE_FLOW = [
   "أعد المحاولة بعد مراجعة مركزة لتحسين الدقة والثبات."
 ];
 
+const DTZ_TEXT_BLOCKS = {
+  rathaus: "Rathaus – Zentralwegweiser: 4. OG Umweltamt (Mülltonnen/Entwässerung) + Gesundheitsamt (Ärzte und Krankenhäuser). 2. OG Sozialamt (soziale Hilfe für Ältere/Behinderungen). 1. OG Verkehrsamt (Führerscheinstelle). EG Bürgeramt (u. a. Kopierer).",
+  marienfest: "Marienstraßen-Fest in Neustadt: Buslinie 306 fährt am Sonntag öfter (10–19 Uhr im Viertelstundentakt). Besucher sollen mit öffentlichen Verkehrsmitteln kommen.",
+  netcom: "E-Mail von NetCom: Auftragsbestätigung für Internet-Anschluss. Technikertermin am 27.07 (10:30–13:30). Termin bestätigen über 'Termin-Zusage'-Link.",
+  ivanov: "Brief von Lehrerin Silke Trautmann an Familie Ivanov: Einladung zum Klassenfest, Teilnahme kostenlos, alle bringen Essen/Getränke mit, Rückmeldung per Telefon/E-Mail oder über Denis.",
+  mittag: "Mittagsbetreuung Grundschule: Montag–Freitag 11:00–14:00. Bei 2 Kindern gibt es 15% Ermäßigung. Auch bei Abwesenheit/Krankheit muss die monatliche Gebühr bezahlt werden.",
+  hotel: "Beschwerdebrief Hotel 'Zum Löwen': '... (40) Frau und ich ... weil die Beschreibung gut klingt. Aber die Zimmer waren klein und laut. Außerdem hatten wir ... warmes Wasser ... obwohl wir uns sofort beschwert haben ... wir möchten unser Geld ...'",
+  handbuch: "Handbuch DTZ: Prüfung auf A2/B1 (GER), Standardsprache (keine Dialekte), Lesen mit 5 Aufgaben/Lesestilen, Teil 5 prüft v. a. Wortschatz/Strukturen/Höflichkeit, emotional belastende Themen (z. B. Krieg/Politik) sind tabu."
+};
+
+const DTZ_INTERACTIVE_QUESTIONS = [
+  {id:1,module:'Hören',source:'Übungssatz 1, S.10',type:'mc',prompt:'Sie wollen zum Rosengarten. Was müssen Sie tun?',options:['An der Haltestelle „Friedrichring“ umsteigen.','Mit der Straßenbahn 78 fahren.','Mit der U-Bahn-Linie 1 oder 2 fahren.'],answer:0,explain:'Lösungsschlüssel Teil Hören 1: a.'},
+  {id:2,module:'Hören',source:'Übungssatz 1, S.10',type:'mc',prompt:'Wer ruft an?',options:['Eine Apotheke.','Eine Arztpraxis.','Eine Versicherung.'],answer:1,explain:'Lösungsschlüssel Teil Hören 1: b.'},
+  {id:3,module:'Hören',source:'Übungssatz 1, S.10',type:'mc',prompt:'Was sollen die Fahrgäste tun?',options:['Im Zug sitzen bleiben.','Mit einem anderen Zug weiterfahren.','Mit einem Bus weiterfahren.'],answer:2,explain:'Lösungsschlüssel Teil Hören 1: c.'},
+  {id:4,module:'Hören',source:'Übungssatz 1, S.10',type:'mc',prompt:'Wo wohnt Henrik?',options:['An einem Park.','Bei einer Schule.','Neben dem Busbahnhof.'],answer:1,explain:'Lösungsschlüssel Teil Hören 1: b.'},
+  {id:5,module:'Hören',source:'Übungssatz 1, S.11',type:'mc',prompt:'Am Sonntag gibt es ...',options:['ein Musikprogramm.','ein Programm für Kinder.','internationale Kurzfilme.'],answer:1,explain:'Lösungsschlüssel Teil Hören 2: b.'},
+  {id:6,module:'Hören',source:'Übungssatz 1, S.11',type:'mc',prompt:'Wie sollen Erwachsene „Medinox“ einnehmen?',options:['Dreimal am Tag.','Mit Wasser.','Nur wenn die Ärztin/der Arzt zustimmt.'],answer:1,explain:'Lösungsschlüssel Teil Hören 2: b.'},
+  {id:7,module:'Hören',source:'Übungssatz 1, S.11',type:'mc',prompt:'Was läuft in der „Lichtburg“?',options:['Ein Kinderfilm.','Ein Krimi.','Eine Komödie.'],answer:0,explain:'Lösungsschlüssel Teil Hören 2: a.'},
+  {id:8,module:'Hören',source:'Übungssatz 1, S.11',type:'mc',prompt:'Wo können Sie Musik hören?',options:['Auf WDR 2.','Auf WDR 3.','Auf WDR 5.'],answer:1,explain:'Lösungsschlüssel Teil Hören 2: b.'},
+  {id:9,module:'Hören',source:'Übungssatz 1, S.11',type:'mc',prompt:'Wann kann man nach Würzburg weiterfahren?',options:['Um 09:36 Uhr.','Um 09:58 Uhr.','Um 10:00 Uhr.'],answer:1,explain:'Lösungsschlüssel Teil Hören 2: b.'},
+
+  {id:21,module:'Lesen',source:'Übungssatz 1, S.14–15',type:'mc',contextKey:'rathaus',prompt:'Ihre Großmutter kann nicht mehr alleine kochen und putzen. In welches Stockwerk?',options:['2. OG','4. OG','anderes Stockwerk'],answer:0,explain:'Sozialamt im 2. OG.'},
+  {id:22,module:'Lesen',source:'Übungssatz 1, S.14–15',type:'mc',contextKey:'rathaus',prompt:'Sie suchen Informationen über Krankenhäuser in Ihrer Gegend. In welches Stockwerk?',options:['2. OG','3. OG','anderes Stockwerk'],answer:2,explain:'Gesundheitsamt ist im 4. OG, daher "anderes Stockwerk".'},
+  {id:23,module:'Lesen',source:'Übungssatz 1, S.14–15',type:'mc',contextKey:'rathaus',prompt:'Sie brauchen einen neuen Führerschein. Wohin?',options:['EG','1. OG','anderes Stockwerk'],answer:1,explain:'Verkehrsamt/Führerscheinstelle im 1. OG.'},
+  {id:24,module:'Lesen',source:'Übungssatz 1, S.14–15',type:'mc',contextKey:'rathaus',prompt:'Sie möchten ein wichtiges Dokument kopieren. Wohin?',options:['EG','2. OG','anderes Stockwerk'],answer:0,explain:'Kopierer im Bürgeramt (EG).'},
+  {id:25,module:'Lesen',source:'Übungssatz 1, S.14–15',type:'mc',contextKey:'rathaus',prompt:'Sie brauchen eine größere Tonne für Ihren Abfall. Wohin?',options:['EG','4. OG','anderes Stockwerk'],answer:1,explain:'Umweltamt/Mülltonnen im 4. OG.'},
+
+  {id:31,module:'Lesen',source:'Übungssatz 1, S.18',type:'tf',contextKey:'marienfest',prompt:'Am Sonntag fährt die Buslinie 306 öfter als sonst.',answer:true,explain:'Im Text: Viertelstundentakt zwischen 10 und 19 Uhr.'},
+  {id:32,module:'Lesen',source:'Übungssatz 1, S.18',type:'mc',contextKey:'marienfest',prompt:'Besucherinnen und Besucher sollen ...',options:['ihr Auto in der Innenstadt parken.','mit öffentlichen Verkehrsmitteln kommen.','nur die Sonderbusse benutzen.'],answer:1,explain:'Im Text werden Besucher ausdrücklich dazu gebeten.'},
+  {id:33,module:'Lesen',source:'Übungssatz 1, S.19',type:'tf',contextKey:'netcom',prompt:'Frau Kim bekommt einen neuen Internet-Anschluss.',answer:true,explain:'NetCom bestätigt den Auftrag für den Anschluss.'},
+  {id:34,module:'Lesen',source:'Übungssatz 1, S.19',type:'mc',contextKey:'netcom',prompt:'Wie soll Frau Kim den Termin bestätigen?',options:['auf den Link klicken.','den Online-Service nutzen.','einen Brief schreiben.'],answer:0,explain:'Im Text: auf den Link „Termin-Zusage“ klicken.'},
+  {id:35,module:'Lesen',source:'Übungssatz 1, S.20',type:'tf',contextKey:'ivanov',prompt:'Frau Trautmann ist die Lehrerin von Denis.',answer:true,explain:'Sie schreibt als Klassenlehrerin.'},
+  {id:36,module:'Lesen',source:'Übungssatz 1, S.20',type:'mc',contextKey:'ivanov',prompt:'Familie Ivanov ...',options:['darf zu einer Feier kommen.','muss in der Schule anrufen.','soll für Essen bezahlen.'],answer:0,explain:'Einladung zum Klassenfest, Teilnahme kostenlos.'},
+  {id:37,module:'Lesen',source:'Übungssatz 1, S.21',type:'tf',contextKey:'mittag',prompt:'Die Mittagsbetreuung ist am Wochenende geschlossen.',answer:true,explain:'Sie findet Montag bis Freitag statt.'},
+  {id:38,module:'Lesen',source:'Übungssatz 1, S.21',type:'tf',contextKey:'mittag',prompt:'Bei zwei Kindern bezahlt man die Hälfte.',answer:false,explain:'Bei 2 Kindern gilt 15% Ermäßigung, nicht 50%.'},
+  {id:39,module:'Lesen',source:'Übungssatz 1, S.21',type:'tf',contextKey:'mittag',prompt:'Die Kinder lernen Regeln für das Zusammenleben.',answer:true,explain:'Gruppenregeln und soziales Miteinander sind explizit genannt.'},
+  {id:40,module:'Lesen',source:'Übungssatz 1, S.22',type:'mc',contextKey:'hotel',prompt:'(40) ___ Frau und ich haben am letzten Wochenende Urlaub in Ihrem Hotel gemacht ...',options:['ihre','meine','seine'],answer:1,explain:'Lösungsschlüssel Teil Lesen 5: 40 b.'},
+  {id:41,module:'Lesen',source:'Übungssatz 1, S.22',type:'mc',contextKey:'hotel',prompt:'(41) ... wir haben Ihr Hotel ausgesucht, ___ die Beschreibung auf Ihrer Website sehr gut klingt.',options:['dass','denn','weil'],answer:2,explain:'Lösungsschlüssel Teil Lesen 5: 41 c.'},
+  {id:42,module:'Lesen',source:'Übungssatz 1, S.22',type:'mc',contextKey:'hotel',prompt:'(42) ___ die Zimmer waren klein und laut!',options:['Aber','Obwohl','Trotzdem'],answer:0,explain:'Lösungsschlüssel Teil Lesen 5: 42 a.'},
+  {id:43,module:'Lesen',source:'Übungssatz 1, S.22',type:'mc',contextKey:'hotel',prompt:'(43) Außerdem hatten wir während des ganzen Wochenendes ___ warmes Wasser ...',options:['kein','leider','nicht'],answer:0,explain:'Lösungsschlüssel Teil Lesen 5: 43 a.'},
+  {id:44,module:'Lesen',source:'Übungssatz 1, S.22',type:'mc',contextKey:'hotel',prompt:'(44) ___ wir uns natürlich sofort nach unserer Ankunft an der Rezeption beschwert haben.',options:['nachdem','obwohl','weil'],answer:1,explain:'Lösungsschlüssel Teil Lesen 5: 44 b.'},
+  {id:45,module:'Lesen',source:'Übungssatz 1, S.22',type:'mc',contextKey:'hotel',prompt:'(45) Wir haben uns sehr geärgert und möchten jetzt unser Geld ___.',options:['haben','wechseln','zurück'],answer:2,explain:'Lösungsschlüssel Teil Lesen 5: 45 c.'},
+
+  {id:'H1',module:'Handbuch',source:'DTZ Handbuch, S.26',type:'tf',contextKey:'handbuch',prompt:'Der DTZ basiert auf den Niveaustufen A2 und B1 des GER.',answer:true,explain:'Im Handbuch Kapitel 4 klar benannt.'},
+  {id:'H2',module:'Handbuch',source:'DTZ Handbuch, S.48',type:'tf',contextKey:'handbuch',prompt:'Im DTZ werden vor allem Dialekte statt Standardsprache geprüft.',answer:false,explain:'Geprüft wird die bundesdeutsche Standardsprache, Dialekte sind ausgeblendet.'},
+  {id:'H3',module:'Handbuch',source:'DTZ Handbuch, S.48',type:'tf',contextKey:'handbuch',prompt:'Der Subtest Lesen enthält fünf Aufgaben mit unterschiedlichen Lesestilen.',answer:true,explain:'Aufgabe 1–5 decken verschiedene Lesestile und Texttypen ab.'},
+  {id:'H4',module:'Handbuch',source:'DTZ Handbuch, S.48–49',type:'tf',contextKey:'handbuch',prompt:'In Lesen Aufgabe 5 geht es u. a. um Wortschatz, Strukturen und Höflichkeitsformen.',answer:true,explain:'Das ist explizit im Handbuch beschrieben.'},
+  {id:'H5',module:'Handbuch',source:'DTZ Handbuch, S.30',type:'tf',contextKey:'handbuch',prompt:'Themen wie Krieg, Politik und Rassismus sind im DTZ als Aufgabenthemen vorgesehen.',answer:false,explain:'Diese Themen werden im Handbuch als tabu genannt.'},
+];
+
 // ══════════════════════════════════════════════════════════
 //  STORAGE
 // ══════════════════════════════════════════════════════════
@@ -448,6 +498,7 @@ function openTask(section,key,xp){
 //  DTZ EXAM
 // ══════════════════════════════════════════════════════════
 let currentDtzDocKey='practice';
+let dtzQuizQuestions=[],dtzQuizIdx=0,dtzQuizCorrect=0,dtzQuizAnswered=false;
 
 function normalizeDtzPage(page,maxPages){
   return Math.max(1,Math.min(parseInt(page)||1,maxPages));
@@ -496,11 +547,142 @@ function openCurrentDtzInNewTab(){
   window.open(getDtzPdfSrc(currentDtzDocKey,page),'_blank','noopener,noreferrer');
 }
 
+function getDtzQuizContext(q){
+  return q.contextKey ? DTZ_TEXT_BLOCKS[q.contextKey] : '';
+}
+
+function startDtzInteractiveQuiz(){
+  const moduleSel=document.getElementById('dtz-quiz-module-sel');
+  const countSel=document.getElementById('dtz-quiz-count-sel');
+  const chosenModule=moduleSel?.value||'all';
+  const requestedCount=parseInt(countSel?.value)||10;
+  const pool=DTZ_INTERACTIVE_QUESTIONS.filter(q=>chosenModule==='all'||q.module===chosenModule);
+  if(pool.length===0)return;
+
+  dtzQuizQuestions=[...pool].sort(()=>Math.random()-.5).slice(0,Math.min(requestedCount,pool.length));
+  dtzQuizIdx=0;
+  dtzQuizCorrect=0;
+  dtzQuizAnswered=false;
+
+  document.getElementById('dtz-quiz-empty').style.display='none';
+  document.getElementById('dtz-quiz-shell').style.display='block';
+  document.getElementById('dtz-quiz-result').style.display='none';
+
+  renderDtzInteractiveQuestion();
+}
+
+function resetDtzInteractiveQuiz(){
+  dtzQuizQuestions=[];
+  dtzQuizIdx=0;
+  dtzQuizCorrect=0;
+  dtzQuizAnswered=false;
+  const empty=document.getElementById('dtz-quiz-empty');
+  const shell=document.getElementById('dtz-quiz-shell');
+  const result=document.getElementById('dtz-quiz-result');
+  if(empty)empty.style.display='block';
+  if(shell)shell.style.display='none';
+  if(result)result.style.display='none';
+}
+
+function renderDtzInteractiveQuestion(){
+  const q=dtzQuizQuestions[dtzQuizIdx];
+  if(!q)return;
+  dtzQuizAnswered=false;
+
+  const total=dtzQuizQuestions.length;
+  document.getElementById('dtz-quiz-score-live').textContent=`${dtzQuizCorrect}/${dtzQuizIdx}`;
+  document.getElementById('dtz-quiz-fill').style.width=`${(dtzQuizIdx/total)*100}%`;
+  document.getElementById('dtz-quiz-next-btn').style.display='none';
+  document.getElementById('dtz-quiz-feedback').classList.remove('visible','correct','wrong');
+
+  const context=getDtzQuizContext(q);
+  let html=`<div class="question-card">
+    <div class="question-type">${q.module} • سؤال ${q.id}</div>
+    <div class="dtz-source">${q.source}</div>
+    ${context?`<div class="dtz-context">${context}</div>`:''}
+    <div class="question-text">${q.prompt}</div>`;
+
+  if(q.type==='mc'){
+    html+=`<div class="options">${q.options.map((o,i)=>`<button class="option" onclick="answerDtzMC(${i})">${o}</button>`).join('')}</div>`;
+  }else{
+    html+=`<div class="options">
+      <button class="option" onclick="answerDtzTF(true)">Richtig</button>
+      <button class="option" onclick="answerDtzTF(false)">Falsch</button>
+    </div>`;
+  }
+
+  html+=`</div>`;
+  document.getElementById('dtz-quiz-content').innerHTML=html;
+}
+
+function showDtzQuizFeedback(correct,q){
+  const fb=document.getElementById('dtz-quiz-feedback');
+  const expected=q.type==='mc' ? q.options[q.answer] : (q.answer?'Richtig':'Falsch');
+  fb.classList.add('visible',correct?'correct':'wrong');
+  fb.innerHTML=correct
+    ?`✓ إجابة صحيحة (${expected})`
+    :`✗ إجابة خاطئة. الصواب: <strong>${expected}</strong>${q.explain?`<br><small>${q.explain}</small>`:''}`;
+}
+
+function answerDtzMC(idx){
+  if(dtzQuizAnswered)return;
+  dtzQuizAnswered=true;
+  const q=dtzQuizQuestions[dtzQuizIdx];
+  const btns=document.querySelectorAll('#dtz-quiz-content .option');
+  btns.forEach(b=>b.disabled=true);
+  const correct=idx===q.answer;
+  btns[idx].classList.add(correct?'correct':'wrong');
+  if(!correct&&btns[q.answer])btns[q.answer].classList.add('correct');
+  showDtzQuizFeedback(correct,q);
+  if(correct){dtzQuizCorrect++;addXP(5);}
+  document.getElementById('dtz-quiz-next-btn').style.display='inline-flex';
+}
+
+function answerDtzTF(val){
+  if(dtzQuizAnswered)return;
+  dtzQuizAnswered=true;
+  const q=dtzQuizQuestions[dtzQuizIdx];
+  const btns=document.querySelectorAll('#dtz-quiz-content .option');
+  btns.forEach(b=>b.disabled=true);
+  const correct=val===q.answer;
+  if(btns[val?0:1])btns[val?0:1].classList.add(correct?'correct':'wrong');
+  if(!correct&&btns[q.answer?0:1])btns[q.answer?0:1].classList.add('correct');
+  showDtzQuizFeedback(correct,q);
+  if(correct){dtzQuizCorrect++;addXP(5);}
+  document.getElementById('dtz-quiz-next-btn').style.display='inline-flex';
+}
+
+function nextDtzInteractiveQuestion(){
+  dtzQuizIdx++;
+  if(dtzQuizIdx>=dtzQuizQuestions.length){
+    endDtzInteractiveQuiz();
+    return;
+  }
+  renderDtzInteractiveQuestion();
+}
+
+function endDtzInteractiveQuiz(){
+  const acc=Math.round((dtzQuizCorrect/dtzQuizQuestions.length)*100);
+  const s=getStats();
+  s.dtzHistory=s.dtzHistory||[];
+  s.dtzHistory.push({date:new Date().toISOString(),score:dtzQuizCorrect,total:dtzQuizQuestions.length,acc});
+  if(s.dtzHistory.length>50)s.dtzHistory.shift();
+  saveStats(s);
+  addXP(10);
+
+  document.getElementById('dtz-quiz-shell').style.display='none';
+  document.getElementById('dtz-quiz-result').style.display='block';
+  document.getElementById('dtz-quiz-final-score').textContent=`${dtzQuizCorrect}/${dtzQuizQuestions.length}`;
+  document.getElementById('dtz-quiz-score-msg').textContent=
+    acc>=85?'جاهز جداً لامتحان DTZ 👏':acc>=65?'نتيجة جيدة — واصل التكرار 💪':'أعد التدريب مع مراجعة النصوص الرسمية 📘';
+}
+
 function renderDtzExam(){
   const summary=document.getElementById('dtz-summary-grid');
   if(summary){
     summary.innerHTML=`
       <div class="dtz-stat"><div class="num">2</div><div class="lbl">ملفات رسمية مدمجة</div></div>
+      <div class="dtz-stat"><div class="num">${DTZ_INTERACTIVE_QUESTIONS.length}</div><div class="lbl">سؤال تفاعلي مستخرج</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_PDFS.practice.pages}</div><div class="lbl">صفحات نموذج التدريب</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_PDFS.handbook.pages}</div><div class="lbl">صفحات الدليل الرسمي</div></div>
     `;
@@ -532,6 +714,8 @@ function renderDtzExam(){
     select.value=currentDtzDocKey;
     switchDtzDocument(select.value||currentDtzDocKey);
   }
+
+  resetDtzInteractiveQuiz();
 }
 
 // ══════════════════════════════════════════════════════════

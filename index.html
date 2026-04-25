@@ -297,6 +297,56 @@
       </div>
 
       <div class="card">
+        <div class="card-title">اختبار DTZ التفاعلي (مستخرج من الملفات الرسمية)</div>
+        <p style="font-size:.9rem;line-height:1.7;color:var(--muted);margin-bottom:12px">
+          تم تحويل أسئلة ونصوص رسمية من Übungssatz 1 + معايير Handbuch إلى تدريب تفاعلي مباشر داخل اللوحة.
+        </p>
+        <div class="dtz-doc-controls">
+          <select class="styled" id="dtz-quiz-module-sel" aria-label="اختيار نوع اختبار DTZ التفاعلي">
+            <option value="all">كل المحاور</option>
+            <option value="Hören">Hören</option>
+            <option value="Lesen">Lesen</option>
+            <option value="Handbuch">Handbuch Checks</option>
+          </select>
+          <select class="styled" id="dtz-quiz-count-sel" aria-label="عدد أسئلة اختبار DTZ التفاعلي">
+            <option value="5">5 أسئلة</option>
+            <option value="10" selected>10 أسئلة</option>
+            <option value="15">15 سؤالاً</option>
+          </select>
+          <button class="btn-primary" onclick="startDtzInteractiveQuiz()">ابدأ الاختبار التفاعلي</button>
+          <button class="btn-secondary" onclick="resetDtzInteractiveQuiz()">إعادة ضبط</button>
+        </div>
+
+        <div id="dtz-quiz-empty" class="dtz-quiz-empty">
+          اختر المحور وعدد الأسئلة ثم ابدأ التدريب.
+        </div>
+
+        <div id="dtz-quiz-shell" style="display:none">
+          <div class="quiz-header">
+            <span class="quiz-score" id="dtz-quiz-score-live" style="font-family:'Oswald',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)">0/0</span>
+            <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="dtz-quiz-fill" style="width:0%"></div></div>
+            <button class="btn-secondary" onclick="resetDtzInteractiveQuiz()">إنهاء</button>
+          </div>
+          <div id="dtz-quiz-content"></div>
+          <div class="quiz-nav">
+            <div id="dtz-quiz-feedback" class="feedback-box"></div>
+            <button class="btn-primary" id="dtz-quiz-next-btn" onclick="nextDtzInteractiveQuestion()" style="margin-left:auto;display:none">التالي →</button>
+          </div>
+        </div>
+
+        <div id="dtz-quiz-result" style="display:none">
+          <div class="score-display">
+            <div class="score-num" id="dtz-quiz-final-score">0/0</div>
+            <div class="score-label">نتيجة اختبار DTZ التفاعلي</div>
+            <div style="margin-top:20px;font-size:1.1rem;color:var(--muted)" id="dtz-quiz-score-msg"></div>
+            <div style="margin-top:20px;display:flex;gap:12px;justify-content:center">
+              <button class="btn-primary" onclick="startDtzInteractiveQuiz()">ابدأ جولة جديدة</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
         <div class="card-title">ملفات الاختبار الرسمية (كاملة)</div>
         <div class="dtz-doc-controls">
           <select class="styled" id="dtz-doc-select" aria-label="اختيار ملف اختبار DTZ" onchange="switchDtzDocument(this.value)">
