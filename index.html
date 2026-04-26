@@ -359,6 +359,19 @@
         <div class="dtz-doc-meta" id="dtz-doc-meta"></div>
         <iframe id="dtz-pdf-frame" class="dtz-pdf-frame" title="DTZ PDF Viewer"></iframe>
       </div>
+
+      <div class="card">
+        <div class="card-title">محتوى Übungssatz 1 (Markdown مدمج بالكامل)</div>
+        <p style="font-size:.88rem;line-height:1.7;color:var(--muted);margin-bottom:10px">
+          هذا القسم يحمّل كل محتوى الملف <strong>DTZ_Übungssatz 1_Erwachsene.md</strong> مباشرة داخل النظام لتسهيل المراجعة النصية.
+        </p>
+        <div class="dtz-doc-controls">
+          <button class="btn-primary" onclick="loadDtzMarkdownContent()">تحديث المحتوى</button>
+          <button class="btn-secondary" onclick="toggleDtzMarkdown()">إظهار/إخفاء</button>
+        </div>
+        <div class="dtz-doc-meta" id="dtz-md-meta">جارٍ التحميل...</div>
+        <pre id="dtz-md-content" class="dtz-md-content"></pre>
+      </div>
     </div>
 
     <!-- ──────────────────── WRITING ──────────────────── -->
@@ -429,11 +442,16 @@
         <div class="card">
           <div class="card-title">الاستماع والفهم</div>
           <div style="padding:10px 0">
-            <p style="font-size:.85rem;color:var(--muted);margin-bottom:14px;line-height:1.6">استمع إلى الجملة ثم اكتب ما سمعته</p>
-            <button class="btn-primary" onclick="newListeningEx()" style="margin-bottom:14px">🎲 جملة عشوائية</button>
+            <p style="font-size:.85rem;color:var(--muted);margin-bottom:14px;line-height:1.6">استمع إلى الجملة ثم اكتب ما سمعته أو اختر تدريب DTZ المربوط مباشرة بأسئلة Hören</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+              <button class="btn-primary" onclick="newListeningEx()">🎲 جملة عشوائية</button>
+              <button class="btn-secondary" onclick="newDtzListeningTopic()">🎧 موضوع DTZ تفاعلي</button>
+            </div>
             <div id="listening-controls" style="display:none">
+              <div id="listening-topic-meta" style="display:none;margin-bottom:10px;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface2)"></div>
               <button class="speak-btn" onclick="playListening()" style="margin-bottom:12px;font-size:.9rem;padding:8px 16px">🔊 استمع مرة أخرى</button>
               <textarea class="write-area" style="min-height:80px" id="listening-input" placeholder="اكتب ما سمعته..."></textarea>
+              <div id="listening-question-box" style="display:none;margin-top:10px"></div>
               <div style="display:flex;gap:10px;margin-top:10px">
                 <button class="btn-primary" onclick="checkListening()">تحقق</button>
                 <button class="btn-secondary" onclick="revealListening()">إظهار الإجابة</button>
