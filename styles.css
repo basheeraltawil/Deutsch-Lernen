@@ -336,8 +336,10 @@ select.styled:focus,input.styled:focus{border-color:var(--gold)}
 .dtz-quiz-empty{padding:14px;border:1px dashed var(--border);border-radius:var(--radius);font-size:.86rem;color:var(--muted);background:var(--surface2);margin-bottom:10px}
 .dtz-source{font-size:.72rem;font-family:'Oswald',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:6px 0 10px}
 .dtz-context{padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);font-size:.84rem;line-height:1.65;color:var(--text);margin-bottom:10px}
+.dtz-md-content{display:none;white-space:pre-wrap;word-break:break-word;max-height:70vh;overflow:auto;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-size:.84rem;line-height:1.65;color:var(--text)}
 
 @media(max-width:900px){
   .dtz-summary-grid{grid-template-columns:1fr}
   .dtz-pdf-frame{height:65vh}
+  .dtz-md-content{max-height:55vh}
 }

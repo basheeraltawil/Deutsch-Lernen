@@ -233,6 +233,8 @@ const ROADMAP_2026 = [
   {key:"2026-12",month:"December 2026",level:"B2",goal:"المراجعة النهائية وإنهاء السنة بخطة استمرارية.",targets:["مراجعة شاملة لأخطاء السنة وتحويلها لقائمة شخصية.","اختبار محاكاة نهائي B2 مع توقيت كامل.","تحسين الطلاقة: 20 دقيقة تحدث يومي بلا توقف.","تحديد خطة Jan 2027 (C1 أو تثبيت B2)."]},
 ];
 
+const DTZ_MARKDOWN_FILE = "DTZ_Übungssatz 1_Erwachsene.md";
+
 const DTZ_PDFS = {
   practice: {
     label: "Übungssatz 1 (نموذج تدريبي رسمي)",
@@ -269,6 +271,7 @@ const DTZ_TEXT_BLOCKS = {
   ivanov: "Brief von Lehrerin Silke Trautmann an Familie Ivanov: Einladung zum Klassenfest, Teilnahme kostenlos, alle bringen Essen/Getränke mit, Rückmeldung per Telefon/E-Mail oder über Denis.",
   mittag: "Mittagsbetreuung Grundschule: Montag–Freitag 11:00–14:00. Bei 2 Kindern gibt es 15% Ermäßigung. Auch bei Abwesenheit/Krankheit muss die monatliche Gebühr bezahlt werden.",
   hotel: "Beschwerdebrief Hotel 'Zum Löwen': '... (40) Frau und ich ... weil die Beschreibung gut klingt. Aber die Zimmer waren klein und laut. Außerdem hatten wir ... warmes Wasser ... obwohl wir uns sofort beschwert haben ... wir möchten unser Geld ...'",
+  sonntag: "Teil 4 Hören (verkaufsoffene Sonntage): 18→c (in Zukunft länger offen), 19→d (Freizeit/Familienzeit leidet), 20→e (zu viel Hektik/Stress schon jetzt).",
   handbuch: "Handbuch DTZ: Prüfung auf A2/B1 (GER), Standardsprache (keine Dialekte), Lesen mit 5 Aufgaben/Lesestilen, Teil 5 prüft v. a. Wortschatz/Strukturen/Höflichkeit, emotional belastende Themen (z. B. Krieg/Politik) sind tabu."
 };
 
@@ -282,6 +285,17 @@ const DTZ_INTERACTIVE_QUESTIONS = [
   {id:7,module:'Hören',source:'Übungssatz 1, S.11',type:'mc',prompt:'Was läuft in der „Lichtburg“?',options:['Ein Kinderfilm.','Ein Krimi.','Eine Komödie.'],answer:0,explain:'Lösungsschlüssel Teil Hören 2: a.'},
   {id:8,module:'Hören',source:'Übungssatz 1, S.11',type:'mc',prompt:'Wo können Sie Musik hören?',options:['Auf WDR 2.','Auf WDR 3.','Auf WDR 5.'],answer:1,explain:'Lösungsschlüssel Teil Hören 2: b.'},
   {id:9,module:'Hören',source:'Übungssatz 1, S.11',type:'mc',prompt:'Wann kann man nach Würzburg weiterfahren?',options:['Um 09:36 Uhr.','Um 09:58 Uhr.','Um 10:00 Uhr.'],answer:1,explain:'Lösungsschlüssel Teil Hören 2: b.'},
+  {id:10,module:'Hören',source:'Übungssatz 1, S.12',type:'tf',prompt:'Die Frau ist Ärztin.',answer:false,explain:'Lösungsschlüssel Teil Hören 3: falsch.'},
+  {id:11,module:'Hören',source:'Übungssatz 1, S.12',type:'mc',prompt:'Die Frau sagt dem Mann, dass ...',options:['die Tabletten lange wirken.','er mindestens drei Tabletten nehmen soll.','er sofort zum Arzt gehen soll.'],answer:0,explain:'Lösungsschlüssel Teil Hören 3: a.'},
+  {id:12,module:'Hören',source:'Übungssatz 1, S.12',type:'tf',prompt:'Maria ist unglücklich in ihrem neuen Job.',answer:false,explain:'Lösungsschlüssel Teil Hören 3: falsch.'},
+  {id:13,module:'Hören',source:'Übungssatz 1, S.12',type:'mc',prompt:'Maria sagt, dass ihre neue Chefin ...',options:['jung ist.','oft arrogant ist.','selbst keine Krankenschwester war.'],answer:0,explain:'Lösungsschlüssel Teil Hören 3: a.'},
+  {id:14,module:'Hören',source:'Übungssatz 1, S.13',type:'tf',prompt:'Günter kommt zum Sommerfest.',answer:true,explain:'Lösungsschlüssel Teil Hören 3: richtig.'},
+  {id:15,module:'Hören',source:'Übungssatz 1, S.13',type:'mc',prompt:'Günter möchte nicht grillen, sondern ...',options:['den Gruppenraum streichen.','einen Kuchen backen.','nichts machen.'],answer:2,explain:'Lösungsschlüssel Teil Hören 3: c.'},
+  {id:16,module:'Hören',source:'Übungssatz 1, S.13',type:'tf',prompt:'Die Frau möchte das Kleid kaufen.',answer:true,explain:'Lösungsschlüssel Teil Hören 3: richtig.'},
+  {id:17,module:'Hören',source:'Übungssatz 1, S.13',type:'mc',prompt:'Der Mann findet das Kleid ...',options:['gut für die Gartenarbeit.','nicht schön.','ziemlich teuer.'],answer:2,explain:'Lösungsschlüssel Teil Hören 3: c.'},
+  {id:18,module:'Hören',source:'Übungssatz 1, S.13',type:'mc',contextKey:'sonntag',prompt:'Welche Aussage passt zu 18?',options:['a Es gibt schon viele Geschäfte, die sonntags offen haben.','b Im Ausland sind die Geschäfte sonntags geschlossen.','c In der Zukunft werden die Geschäfte länger offen sein.','d Man kann sonntags seine Freizeit nicht mehr zusammen verbringen.','e Schon jetzt haben die Leute zu viel Hektik.','f Sonntags sollten auch Banken offen haben.'],answer:2,explain:'Lösungsschlüssel Teil Hören 4: c.'},
+  {id:19,module:'Hören',source:'Übungssatz 1, S.13',type:'mc',contextKey:'sonntag',prompt:'Welche Aussage passt zu 19?',options:['a Es gibt schon viele Geschäfte, die sonntags offen haben.','b Im Ausland sind die Geschäfte sonntags geschlossen.','c In der Zukunft werden die Geschäfte länger offen sein.','d Man kann sonntags seine Freizeit nicht mehr zusammen verbringen.','e Schon jetzt haben die Leute zu viel Hektik.','f Sonntags sollten auch Banken offen haben.'],answer:3,explain:'Lösungsschlüssel Teil Hören 4: d.'},
+  {id:20,module:'Hören',source:'Übungssatz 1, S.13',type:'mc',contextKey:'sonntag',prompt:'Welche Aussage passt zu 20?',options:['a Es gibt schon viele Geschäfte, die sonntags offen haben.','b Im Ausland sind die Geschäfte sonntags geschlossen.','c In der Zukunft werden die Geschäfte länger offen sein.','d Man kann sonntags seine Freizeit nicht mehr zusammen verbringen.','e Schon jetzt haben die Leute zu viel Hektik.','f Sonntags sollten auch Banken offen haben.'],answer:4,explain:'Lösungsschlüssel Teil Hören 4: e.'},
 
   {id:21,module:'Lesen',source:'Übungssatz 1, S.14–15',type:'mc',contextKey:'rathaus',prompt:'Ihre Großmutter kann nicht mehr alleine kochen und putzen. In welches Stockwerk?',options:['2. OG','4. OG','anderes Stockwerk'],answer:0,explain:'Sozialamt im 2. OG.'},
   {id:22,module:'Lesen',source:'Übungssatz 1, S.14–15',type:'mc',contextKey:'rathaus',prompt:'Sie suchen Informationen über Krankenhäuser in Ihrer Gegend. In welches Stockwerk?',options:['2. OG','3. OG','anderes Stockwerk'],answer:2,explain:'Gesundheitsamt ist im 4. OG, daher "anderes Stockwerk".'},
@@ -310,6 +324,29 @@ const DTZ_INTERACTIVE_QUESTIONS = [
   {id:'H3',module:'Handbuch',source:'DTZ Handbuch, S.48',type:'tf',contextKey:'handbuch',prompt:'Der Subtest Lesen enthält fünf Aufgaben mit unterschiedlichen Lesestilen.',answer:true,explain:'Aufgabe 1–5 decken verschiedene Lesestile und Texttypen ab.'},
   {id:'H4',module:'Handbuch',source:'DTZ Handbuch, S.48–49',type:'tf',contextKey:'handbuch',prompt:'In Lesen Aufgabe 5 geht es u. a. um Wortschatz, Strukturen und Höflichkeitsformen.',answer:true,explain:'Das ist explizit im Handbuch beschrieben.'},
   {id:'H5',module:'Handbuch',source:'DTZ Handbuch, S.30',type:'tf',contextKey:'handbuch',prompt:'Themen wie Krieg, Politik und Rassismus sind im DTZ als Aufgabenthemen vorgesehen.',answer:false,explain:'Diese Themen werden im Handbuch als tabu genannt.'},
+];
+
+const DTZ_LISTENING_TOPICS = [
+  {id:1,part:'Teil 1',topic:'ÖPNV-Ansage: Rosengarten',type:'mc',audioText:'Verehrte Fahrgäste: Aufgrund von Bauarbeiten ist die U-Bahn-Haltestelle Rosengarten gesperrt. Benutzen Sie bitte den Bus 78 bis Friedrichring und steigen dort in die Straßenbahn 807 oder den Bus 87 um.',prompt:'Sie wollen zum Rosengarten. Was müssen Sie tun?',options:['An der Haltestelle „Friedrichring“ umsteigen.','Mit der Straßenbahn 78 fahren.','Mit der U-Bahn-Linie 1 oder 2 fahren.'],answer:0,explain:'Richtig ist a.'},
+  {id:2,part:'Teil 1',topic:'Telefonnachricht aus Praxis',type:'mc',audioText:'Guten Tag, Herr Schmitz, hier ist die Praxis Dr. Müller. Ihr neues Rezept ist ausgestellt und liegt für Sie bereit. Bitte bringen Sie Ihre Versichertenkarte mit.',prompt:'Wer ruft an?',options:['Eine Apotheke.','Eine Arztpraxis.','Eine Versicherung.'],answer:1,explain:'Richtig ist b.'},
+  {id:3,part:'Teil 1',topic:'Bahnhofsdurchsage',type:'mc',audioText:'Liebe Fahrgäste, wegen eines technischen Defekts ist die Weiterfahrt mit diesem Zug nicht möglich. Bitte verlassen Sie den Zug und benutzen Sie zur Weiterfahrt die bereitstehenden Busse.',prompt:'Was sollen die Fahrgäste tun?',options:['Im Zug sitzen bleiben.','Mit einem anderen Zug weiterfahren.','Mit einem Bus weiterfahren.'],answer:2,explain:'Richtig ist c.'},
+  {id:4,part:'Teil 1',topic:'Sprachnachricht von Henrik',type:'mc',audioText:'Du nimmst vom Busbahnhof den Bus 102 Richtung Nordpark und steigst an der Hansastraße aus. Dort siehst du die Schillerschule. Ich wohne direkt gegenüber.',prompt:'Wo wohnt Henrik?',options:['An einem Park.','Bei einer Schule.','Neben dem Busbahnhof.'],answer:1,explain:'Richtig ist b.'},
+  {id:5,part:'Teil 2',topic:'Radio: Festivalprogramm',type:'mc',audioText:'Am Sonntag gibt es beim Sommer-Festival viele Programmpunkte speziell für Kinder, zum Beispiel Puppentheater und eine Hüpfburg.',prompt:'Am Sonntag gibt es ...',options:['ein Musikprogramm.','ein Programm für Kinder.','internationale Kurzfilme.'],answer:1,explain:'Richtig ist b.'},
+  {id:6,part:'Teil 2',topic:'Werbung Medinox',type:'mc',audioText:'Nehmen Sie Medinox mittags und abends mit einem Glas Wasser ein. Kinder und Jugendliche unter 16 Jahren nur nach Rücksprache mit dem Arzt.',prompt:'Wie sollen Erwachsene „Medinox“ einnehmen?',options:['Dreimal am Tag.','Mit Wasser.','Nur wenn die Ärztin/der Arzt zustimmt.'],answer:1,explain:'Richtig ist b.'},
+  {id:7,part:'Teil 2',topic:'Kinoprogramm',type:'mc',audioText:'Für kleine Kinobesucher läuft in der Lichtburg um 15 und 17 Uhr der Zeichentrickfilm Leo gegen den Rest der Welt.',prompt:'Was läuft in der „Lichtburg“?',options:['Ein Kinderfilm.','Ein Krimi.','Eine Komödie.'],answer:0,explain:'Richtig ist a.'},
+  {id:8,part:'Teil 2',topic:'Radio-Programmtipps',type:'mc',audioText:'Auf WDR 3 hören Sie das Wunschkonzert mit Carmen Wasser. Auf WDR 2 kommt ein Hörspiel-Krimi, auf WDR 5 eine politische Doku.',prompt:'Wo können Sie Musik hören?',options:['Auf WDR 2.','Auf WDR 3.','Auf WDR 5.'],answer:1,explain:'Richtig ist b.'},
+  {id:9,part:'Teil 2',topic:'Zuganschlüsse',type:'mc',audioText:'Planmäßige Ankunft in Aschaffenburg ist 9:36. Anschluss nach Würzburg mit dem Intercity um 9:58 von Gleis 3.',prompt:'Wann kann man nach Würzburg weiterfahren?',options:['Um 09:36 Uhr.','Um 09:58 Uhr.','Um 10:00 Uhr.'],answer:1,explain:'Richtig ist b.'},
+  {id:10,part:'Teil 3',topic:'Gespräch Apotheke',type:'tf',audioText:'In der Apotheke fragt ein Mann nach Kopfschmerztabletten. Die Mitarbeiterin sagt, maximal drei täglich und wenn es nicht reicht, soll er zum Arzt gehen.',prompt:'Die Frau ist Ärztin.',answer:false,explain:'Sie arbeitet in der Apotheke, nicht als Ärztin.'},
+  {id:11,part:'Teil 3',topic:'Gespräch Apotheke',type:'mc',audioText:'Die Mitarbeiterin erklärt: Nicht mehr als drei Tabletten täglich. Die Tabletten wirken bis zu sechs Stunden. Wenn das nicht genug ist, soll der Mann zum Arzt gehen.',prompt:'Die Frau sagt dem Mann, dass ...',options:['die Tabletten lange wirken.','er mindestens drei Tabletten nehmen soll.','er sofort zum Arzt gehen soll.'],answer:0,explain:'Richtig ist a.'},
+  {id:12,part:'Teil 3',topic:'Gespräch über neuen Job',type:'tf',audioText:'Maria sagt, seit sie den neuen Job im Krankenhaus hat, ist sie ein ganz anderer Mensch. Das Team sei nett und die neue Chefin unterstützend.',prompt:'Maria ist unglücklich in ihrem neuen Job.',answer:false,explain:'Sie ist mit dem neuen Job zufrieden.'},
+  {id:13,part:'Teil 3',topic:'Gespräch über neuen Job',type:'mc',audioText:'Maria beschreibt ihre neue Chefin als jung und erfahren, weil sie selbst Krankenschwester war.',prompt:'Maria sagt, dass ihre neue Chefin ...',options:['jung ist.','oft arrogant ist.','selbst keine Krankenschwester war.'],answer:0,explain:'Richtig ist a.'},
+  {id:14,part:'Teil 3',topic:'Kindergarten-Sommerfest',type:'tf',audioText:'Angela fragt Günter wegen dem Sommerfest. Er sagt zwar, dass er diesmal nicht grillen will, kommt aber am Ende trotzdem mit.',prompt:'Günter kommt zum Sommerfest.',answer:true,explain:'Er sagt am Ende: „Ich komme ja mit.“'},
+  {id:15,part:'Teil 3',topic:'Kindergarten-Sommerfest',type:'mc',audioText:'Günter sagt, diesmal könne ein anderer grillen. Er will nicht grillen.',prompt:'Günter möchte nicht grillen, sondern ...',options:['den Gruppenraum streichen.','einen Kuchen backen.','nichts machen.'],answer:2,explain:'Richtig ist c.'},
+  {id:16,part:'Teil 3',topic:'Kleid im Geschäft',type:'tf',audioText:'Die Frau findet das grüne Kleid schön und fragt, ob sie es kaufen soll. Sie sagt, sie zieht es einfach mal an und braucht etwas für den Geburtstag.',prompt:'Die Frau möchte das Kleid kaufen.',answer:true,explain:'Sie überlegt es ernsthaft und probiert es an.'},
+  {id:17,part:'Teil 3',topic:'Kleid im Geschäft',type:'mc',audioText:'Der Mann sagt: 99 Euro sei vielleicht etwas viel für ein Kleid.',prompt:'Der Mann findet das Kleid ...',options:['gut für die Gartenarbeit.','nicht schön.','ziemlich teuer.'],answer:2,explain:'Richtig ist c.'},
+  {id:18,part:'Teil 4',topic:'Meinung: Verkaufsoffene Sonntage',type:'mc',audioText:'Die Sprecherin 18 ist dafür und meint: In 20 Jahren können wir rund um die Uhr einkaufen, das sei der Trend.',prompt:'Welche Aussage passt zu 18?',options:['a Es gibt schon viele Geschäfte, die sonntags offen haben.','b Im Ausland sind die Geschäfte sonntags geschlossen.','c In der Zukunft werden die Geschäfte länger offen sein.','d Man kann sonntags seine Freizeit nicht mehr zusammen verbringen.','e Schon jetzt haben die Leute zu viel Hektik.','f Sonntags sollten auch Banken offen haben.'],answer:2,explain:'Richtig ist c.'},
+  {id:19,part:'Teil 4',topic:'Meinung: Familie/Freizeit',type:'mc',audioText:'Die Sprecherin 19 warnt: Wenn immer mehr Branchen sonntags arbeiten, sind Familien und Freunde nicht mehr gemeinsam frei.',prompt:'Welche Aussage passt zu 19?',options:['a Es gibt schon viele Geschäfte, die sonntags offen haben.','b Im Ausland sind die Geschäfte sonntags geschlossen.','c In der Zukunft werden die Geschäfte länger offen sein.','d Man kann sonntags seine Freizeit nicht mehr zusammen verbringen.','e Schon jetzt haben die Leute zu viel Hektik.','f Sonntags sollten auch Banken offen haben.'],answer:3,explain:'Richtig ist d.'},
+  {id:20,part:'Teil 4',topic:'Meinung: Stress und Hektik',type:'mc',audioText:'Die Sprecherin 20 ist Ärztin und sagt, viele Menschen leiden schon unter Stress. Noch längere Öffnungszeiten machen das nicht besser.',prompt:'Welche Aussage passt zu 20?',options:['a Es gibt schon viele Geschäfte, die sonntags offen haben.','b Im Ausland sind die Geschäfte sonntags geschlossen.','c In der Zukunft werden die Geschäfte länger offen sein.','d Man kann sonntags seine Freizeit nicht mehr zusammen verbringen.','e Schon jetzt haben die Leute zu viel Hektik.','f Sonntags sollten auch Banken offen haben.'],answer:4,explain:'Richtig ist e.'},
 ];
 
 // ══════════════════════════════════════════════════════════
@@ -499,6 +536,8 @@ function openTask(section,key,xp){
 // ══════════════════════════════════════════════════════════
 let currentDtzDocKey='practice';
 let dtzQuizQuestions=[],dtzQuizIdx=0,dtzQuizCorrect=0,dtzQuizAnswered=false;
+let dtzMarkdownRaw='';
+let dtzMarkdownVisible=false;
 
 function normalizeDtzPage(page,maxPages){
   return Math.max(1,Math.min(parseInt(page)||1,maxPages));
@@ -545,6 +584,35 @@ function openCurrentDtzInNewTab(){
   if(!DTZ_PDFS[currentDtzDocKey])return;
   const page=getDtzPageInputValue();
   window.open(getDtzPdfSrc(currentDtzDocKey,page),'_blank','noopener,noreferrer');
+}
+
+async function loadDtzMarkdownContent(){
+  const meta=document.getElementById('dtz-md-meta');
+  const content=document.getElementById('dtz-md-content');
+  if(!content)return;
+
+  if(meta)meta.textContent='جارٍ تحميل محتوى markdown...';
+  try{
+    const res=await fetch(encodeURI(DTZ_MARKDOWN_FILE),{cache:'no-cache'});
+    if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    dtzMarkdownRaw=await res.text();
+    content.textContent=dtzMarkdownRaw;
+    if(meta){
+      const lines=dtzMarkdownRaw.split('\n').length;
+      meta.textContent=`تم دمج الملف بنجاح: ${DTZ_MARKDOWN_FILE} — ${lines} سطر — ${dtzMarkdownRaw.length} حرف.`;
+    }
+    if(dtzMarkdownVisible)content.style.display='block';
+  }catch(err){
+    if(meta)meta.textContent=`تعذّر تحميل الملف ${DTZ_MARKDOWN_FILE}: ${err.message}`;
+    content.textContent='';
+  }
+}
+
+function toggleDtzMarkdown(){
+  const content=document.getElementById('dtz-md-content');
+  if(!content)return;
+  dtzMarkdownVisible=!dtzMarkdownVisible;
+  content.style.display=dtzMarkdownVisible?'block':'none';
 }
 
 function getDtzQuizContext(q){
@@ -717,8 +785,9 @@ function renderDtzExam(){
   const summary=document.getElementById('dtz-summary-grid');
   if(summary){
     summary.innerHTML=`
-      <div class="dtz-stat"><div class="num">2</div><div class="lbl">ملفات رسمية مدمجة</div></div>
+      <div class="dtz-stat"><div class="num">3</div><div class="lbl">مصادر رسمية مدمجة</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_INTERACTIVE_QUESTIONS.length}</div><div class="lbl">سؤال تفاعلي مستخرج</div></div>
+      <div class="dtz-stat"><div class="num">${DTZ_LISTENING_TOPICS.length}</div><div class="lbl">موضوع استماع مطابق للأسئلة</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_PDFS.practice.pages}</div><div class="lbl">صفحات نموذج التدريب</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_PDFS.handbook.pages}</div><div class="lbl">صفحات الدليل الرسمي</div></div>
     `;
@@ -751,6 +820,9 @@ function renderDtzExam(){
     switchDtzDocument(select.value||currentDtzDocKey);
   }
 
+  const mdBox=document.getElementById('dtz-md-content');
+  if(mdBox)mdBox.style.display=dtzMarkdownVisible?'block':'none';
+  loadDtzMarkdownContent();
   resetDtzInteractiveQuiz();
 }
 
@@ -1113,6 +1185,8 @@ function checkComp(ri,qi,oi,ans){
 // ══════════════════════════════════════════════════════════
 let recognition=null,currentVoiceTarget='',isRecording=false;
 let listeningTarget=null;
+let listeningMode='general';
+let activeListeningQuestion=null;
 
 function setupRecognition(){
   if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window))return null;
@@ -1184,12 +1258,98 @@ function speakTarget(){speak(currentVoiceTarget);}
 
 // Listening Exercise
 function newListeningEx(){
+  listeningMode='general';
+  activeListeningQuestion=null;
   listeningTarget=SENTENCES[Math.floor(Math.random()*SENTENCES.length)];
   document.getElementById('listening-controls').style.display='block';
   document.getElementById('listening-input').value='';
   document.getElementById('listening-result').style.display='none';
+  const meta=document.getElementById('listening-topic-meta');
+  if(meta){
+    meta.style.display='none';
+    meta.innerHTML='';
+  }
+  const qBox=document.getElementById('listening-question-box');
+  if(qBox){
+    qBox.style.display='none';
+    qBox.innerHTML='';
+  }
   speak(listeningTarget.de);
 }
+
+function newDtzListeningTopic(){
+  listeningMode='dtz';
+  activeListeningQuestion=DTZ_LISTENING_TOPICS[Math.floor(Math.random()*DTZ_LISTENING_TOPICS.length)];
+  listeningTarget={de:activeListeningQuestion.audioText,ar:`DTZ ${activeListeningQuestion.part} • Frage ${activeListeningQuestion.id}`};
+  document.getElementById('listening-controls').style.display='block';
+  document.getElementById('listening-input').value='';
+  document.getElementById('listening-result').style.display='none';
+
+  const meta=document.getElementById('listening-topic-meta');
+  if(meta){
+    meta.style.display='block';
+    meta.innerHTML=`
+      <div style="font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px">
+        DTZ Hören • ${escapeHtml(activeListeningQuestion.part)} • Frage ${escapeHtml(activeListeningQuestion.id)}
+      </div>
+      <div style="font-size:.84rem;color:var(--text)">${escapeHtml(activeListeningQuestion.topic)}</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:4px">${escapeHtml(activeListeningQuestion.prompt)}</div>
+    `;
+  }
+  renderListeningQuestionBox(activeListeningQuestion);
+  speak(listeningTarget.de);
+}
+
+function renderListeningQuestionBox(topic){
+  const qBox=document.getElementById('listening-question-box');
+  if(!qBox||!topic)return;
+  let optionsHtml='';
+  if(topic.type==='tf'){
+    optionsHtml=`
+      <button class="option" onclick="answerListeningQuestion(1)">Richtig</button>
+      <button class="option" onclick="answerListeningQuestion(0)">Falsch</button>
+    `;
+  }else{
+    optionsHtml=(topic.options||[]).map((opt,idx)=>`
+      <button class="option" onclick="answerListeningQuestion(${idx})">${escapeHtml(opt)}</button>
+    `).join('');
+  }
+  qBox.style.display='block';
+  qBox.innerHTML=`
+    <div style="font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">
+      اختر الإجابة المباشرة بعد الاستماع
+    </div>
+    <div class="options">${optionsHtml}</div>
+  `;
+}
+
+function answerListeningQuestion(value){
+  if(!activeListeningQuestion)return;
+  const q=activeListeningQuestion;
+  const opts=document.querySelectorAll('#listening-question-box .option');
+  opts.forEach(btn=>{btn.disabled=true;btn.setAttribute('aria-disabled','true');});
+
+  const expected=q.type==='tf'?(q.answer?1:0):q.answer;
+  const isCorrect=value===expected;
+  if(value>=0&&value<opts.length)opts[value].classList.add(isCorrect?'correct':'wrong');
+  if(!isCorrect&&expected>=0&&expected<opts.length)opts[expected].classList.add('correct');
+
+  const r=document.getElementById('listening-result');
+  if(!r)return;
+  r.style.display='block';
+  r.style.background=isCorrect?'rgba(74,184,122,.1)':'rgba(212,64,64,.1)';
+  r.style.border=`1px solid ${isCorrect?'rgba(74,184,122,.3)':'rgba(212,64,64,.3)'}`;
+  const expectedText=q.type==='tf'
+    ? (q.answer?'Richtig':'Falsch')
+    : (q.options?.[q.answer]||'');
+  r.innerHTML=`
+    <div style="margin-bottom:6px;font-family:'Oswald',sans-serif;color:${isCorrect?'var(--green)':'var(--red)'}">${isCorrect?'✓ إجابة صحيحة':'✗ إجابة غير صحيحة'}</div>
+    <div style="font-size:.85rem">الإجابة الصحيحة: <span style="color:var(--gold)">${escapeHtml(expectedText)}</span></div>
+    ${q.explain?`<div style="font-size:.82rem;color:var(--muted);margin-top:4px">${escapeHtml(q.explain)}</div>`:''}
+  `;
+  if(isCorrect)addXP(8);
+}
+
 function playListening(){if(listeningTarget)speak(listeningTarget.de);}
 function checkListening(){
   const val=document.getElementById('listening-input').value.trim();
@@ -1201,7 +1361,8 @@ function checkListening(){
   r.style.border=`1px solid ${score>70?'rgba(74,184,122,.3)':'rgba(212,64,64,.3)'}`;
   r.innerHTML=`<div style="margin-bottom:6px;font-family:'Oswald',sans-serif;color:${score>70?'var(--green)':'var(--red)'}">${score}% تطابق</div>
   <div style="font-size:.85rem">النص الصحيح: <span style="font-family:'Fira Code',monospace;color:var(--gold)">${listeningTarget.de}</span></div>
-  <div style="font-size:.82rem;color:var(--muted);margin-top:4px">${listeningTarget.ar}</div>`;
+  <div style="font-size:.82rem;color:var(--muted);margin-top:4px">${listeningTarget.ar}</div>
+  ${activeListeningQuestion?`<div style="font-size:.8rem;color:var(--muted);margin-top:6px">${escapeHtml(activeListeningQuestion.prompt)}</div>`:''}`;
   if(score>60)addXP(8);
 }
 function revealListening(){
@@ -1211,7 +1372,8 @@ function revealListening(){
   r.style.background='rgba(212,168,32,.08)';
   r.style.border='1px solid rgba(212,168,32,.2)';
   r.innerHTML=`<div style="font-family:'Fira Code',monospace;color:var(--gold);margin-bottom:4px">${listeningTarget.de}</div>
-  <div style="font-size:.85rem;color:var(--muted)">${listeningTarget.ar}</div>`;
+  <div style="font-size:.85rem;color:var(--muted)">${listeningTarget.ar}</div>
+  ${activeListeningQuestion?`<div style="font-size:.8rem;color:var(--muted);margin-top:6px">${escapeHtml(activeListeningQuestion.explain||'')}</div>`:''}`;
 }
 
 // ══════════════════════════════════════════════════════════
