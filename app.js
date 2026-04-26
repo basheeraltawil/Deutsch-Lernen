@@ -593,7 +593,8 @@ async function loadDtzMarkdownContent(){
 
   if(meta)meta.textContent='جارٍ تحميل محتوى markdown...';
   try{
-    const res=await fetch(encodeURIComponent(DTZ_MARKDOWN_FILE),{cache:'no-cache'});
+    const markdownUrl=new URL(DTZ_MARKDOWN_FILE,window.location.href).href;
+    const res=await fetch(markdownUrl,{cache:'no-cache'});
     if(!res.ok)throw new Error(`HTTP ${res.status}`);
     dtzMarkdownRaw=await res.text();
     content.textContent=dtzMarkdownRaw;
@@ -1185,7 +1186,6 @@ function checkComp(ri,qi,oi,ans){
 // ══════════════════════════════════════════════════════════
 let recognition=null,currentVoiceTarget='',isRecording=false;
 let listeningTarget=null;
-let listeningTargetMeta='';
 let listeningMode='general';
 let activeListeningQuestion=null;
 
@@ -1261,7 +1261,6 @@ function speakTarget(){speak(currentVoiceTarget);}
 function newListeningEx(){
   listeningMode='general';
   activeListeningQuestion=null;
-  listeningTargetMeta='';
   listeningTarget=SENTENCES[Math.floor(Math.random()*SENTENCES.length)];
   document.getElementById('listening-controls').style.display='block';
   document.getElementById('listening-input').value='';
@@ -1283,7 +1282,6 @@ function newDtzListeningTopic(){
   listeningMode='dtz';
   activeListeningQuestion=DTZ_LISTENING_TOPICS[Math.floor(Math.random()*DTZ_LISTENING_TOPICS.length)];
   listeningTarget={de:activeListeningQuestion.audioText,ar:''};
-  listeningTargetMeta=`DTZ ${activeListeningQuestion.part} • Frage ${activeListeningQuestion.id}`;
   document.getElementById('listening-controls').style.display='block';
   document.getElementById('listening-input').value='';
   document.getElementById('listening-result').style.display='none';
@@ -1365,7 +1363,6 @@ function checkListening(){
   r.innerHTML=`<div style="margin-bottom:6px;font-family:'Oswald',sans-serif;color:${score>70?'var(--green)':'var(--red)'}">${score}% تطابق</div>
   <div style="font-size:.85rem">النص الصحيح: <span style="font-family:'Fira Code',monospace;color:var(--gold)">${listeningTarget.de}</span></div>
   ${listeningTarget.ar?`<div style="font-size:.82rem;color:var(--muted);margin-top:4px">${listeningTarget.ar}</div>`:''}
-  ${listeningTargetMeta?`<div style="font-size:.8rem;color:var(--muted);margin-top:4px">${escapeHtml(listeningTargetMeta)}</div>`:''}
   ${activeListeningQuestion?`<div style="font-size:.8rem;color:var(--muted);margin-top:6px">${escapeHtml(activeListeningQuestion.prompt)}</div>`:''}`;
   if(score>60)addXP(8);
 }
@@ -1377,7 +1374,6 @@ function revealListening(){
   r.style.border='1px solid rgba(212,168,32,.2)';
   r.innerHTML=`<div style="font-family:'Fira Code',monospace;color:var(--gold);margin-bottom:4px">${listeningTarget.de}</div>
   ${listeningTarget.ar?`<div style="font-size:.85rem;color:var(--muted)">${listeningTarget.ar}</div>`:''}
-  ${listeningTargetMeta?`<div style="font-size:.8rem;color:var(--muted);margin-top:4px">${escapeHtml(listeningTargetMeta)}</div>`:''}
   ${activeListeningQuestion?`<div style="font-size:.8rem;color:var(--muted);margin-top:6px">${escapeHtml(activeListeningQuestion.explain||'')}</div>`:''}`;
 }
 
