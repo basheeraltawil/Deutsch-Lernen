@@ -593,8 +593,7 @@ async function loadDtzMarkdownContent(){
 
   if(meta)meta.textContent='جارٍ تحميل محتوى markdown...';
   try{
-    const markdownUrl=new URL(DTZ_MARKDOWN_FILE,window.location.href).href;
-    const res=await fetch(markdownUrl,{cache:'no-cache'});
+    const res=await fetch(DTZ_MARKDOWN_FILE,{cache:'no-cache'});
     if(!res.ok)throw new Error(`HTTP ${res.status}`);
     dtzMarkdownRaw=await res.text();
     content.textContent=dtzMarkdownRaw;
@@ -785,8 +784,9 @@ function endDtzInteractiveQuiz(){
 function renderDtzExam(){
   const summary=document.getElementById('dtz-summary-grid');
   if(summary){
+    const dtzSourceCount=Object.keys(DTZ_PDFS).length+1;
     summary.innerHTML=`
-      <div class="dtz-stat"><div class="num">3</div><div class="lbl">مصادر رسمية مدمجة</div></div>
+      <div class="dtz-stat"><div class="num">${dtzSourceCount}</div><div class="lbl">مصادر رسمية مدمجة</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_INTERACTIVE_QUESTIONS.length}</div><div class="lbl">سؤال تفاعلي مستخرج</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_LISTENING_TOPICS.length}</div><div class="lbl">موضوع استماع مطابق للأسئلة</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_PDFS.practice.pages}</div><div class="lbl">صفحات نموذج التدريب</div></div>
