@@ -234,6 +234,7 @@ const ROADMAP_2026 = [
 ];
 
 const DTZ_MARKDOWN_FILE = "DTZ_Übungssatz 1_Erwachsene.md";
+const DTZ_ADDITIONAL_SOURCES = 1; // Markdown source integrated into dashboard besides PDF files
 
 const DTZ_PDFS = {
   practice: {
@@ -784,7 +785,7 @@ function endDtzInteractiveQuiz(){
 function renderDtzExam(){
   const summary=document.getElementById('dtz-summary-grid');
   if(summary){
-    const dtzSourceCount=Object.keys(DTZ_PDFS).length+1;
+    const dtzSourceCount=Object.keys(DTZ_PDFS).length+DTZ_ADDITIONAL_SOURCES;
     summary.innerHTML=`
       <div class="dtz-stat"><div class="num">${dtzSourceCount}</div><div class="lbl">مصادر رسمية مدمجة</div></div>
       <div class="dtz-stat"><div class="num">${DTZ_INTERACTIVE_QUESTIONS.length}</div><div class="lbl">سؤال تفاعلي مستخرج</div></div>
@@ -1312,7 +1313,7 @@ function renderListeningQuestionBox(topic){
     `;
   }else{
     optionsHtml=(topic.options||[]).map((opt,idx)=>`
-      <button class="option" onclick="answerListeningQuestion(${idx})">${escapeHtml(opt)}</button>
+<button class="option" onclick="answerListeningQuestion(${idx})">${escapeHtml(opt)}</button>
     `).join('');
   }
   qBox.style.display='block';
